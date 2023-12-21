@@ -4,7 +4,7 @@
 class Position {
 public:
 	Postition(int pos) :m_position{ pos };
-	int get_position() { return m_position };
+	int get_value() { return m_position };
 private:
 	int m_position{ 0 };
 };
