@@ -1,0 +1,13 @@
+#ifndef POSITION_H
+#define POSITION_H
+//@Pinton Mattia
+class Position {
+public:
+	Postition(int pos) :m_position{ pos };
+	int get_position() { return m_position };
+private:
+	int m_position{ 0 };
+};
+
+std::ostream& operator<<(std::ostream& os, Position pos);
+#endif
