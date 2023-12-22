@@ -9,9 +9,10 @@ std::ostream& operator<<(std::ostream& os,const Position& pos)
 {
 	const int line_size = (Board::BOARD_SIZE / 4)+1; // 8
 	const int column_size = (Board::BOARD_SIZE / 4)-1; // 6
-	std::string outp;
+	std::string outp = "";
 	if (pos.get_valore() < line_size) { // 0 - 7
-		outp = "H" + (8 - pos.get_valore());
+		outp += "H";
+		outp += static_cast<char>('0'+(8 - pos.get_valore()));
 	}
 	else if (pos.get_valore() < line_size + column_size) { // 8 - 13
 		int temp_val = pos.get_valore() - line_size; // 0 - 7
@@ -24,6 +25,8 @@ std::ostream& operator<<(std::ostream& os,const Position& pos)
 	else // 21 - 28
 	{
 		int temp_val = pos.get_valore() - (2*line_size + column_size);; // 0 - 7
-		outp = const_cast<char>('B' + temp_val) + "8";
+		outp = static_cast<char>('B' + temp_val) + "8";
 	}
+	
+	return os << outp;
 }

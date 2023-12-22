@@ -15,7 +15,7 @@ public:
     void run();
 private:
     Board m_board;
-    std::array<Player,N_PLAYER> m_players;
+    std::array<Player*,N_PLAYER> m_players;
     //Aggiungere i/o
 };
 
