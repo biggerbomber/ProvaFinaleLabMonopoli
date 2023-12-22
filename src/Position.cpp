@@ -16,17 +16,19 @@ std::ostream& operator<<(std::ostream& os,const Position& pos)
 	}
 	else if (pos.get_valore() < line_size + column_size) { // 8 - 13
 		int temp_val = pos.get_valore() - line_size; // 0 - 7
-		outp = static_cast<char>('G' - temp_val)+ "1";
+		outp += static_cast<char>('G' - temp_val);
+		outp += "1";
 	}
 	else if (pos.get_valore() < line_size*2 + column_size) {  //16 - 21
 		int temp_val = pos.get_valore() - (line_size + column_size); // 0 - 7
-		outp = "A" + (temp_val + 1);
+		outp += "A";
+		outp += static_cast<char>('0' + temp_val + 1);
 	}
 	else // 21 - 28
 	{
 		int temp_val = pos.get_valore() - (2*line_size + column_size);; // 0 - 7
-		outp = static_cast<char>('B' + temp_val) + "8";
+		outp += static_cast<char>('B' + temp_val);
+		outp += "8";
 	}
-	
 	return os << outp;
 }
