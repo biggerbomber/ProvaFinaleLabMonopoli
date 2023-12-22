@@ -1,7 +1,10 @@
+//@Pinton Mattia
+
 //############### INCLUDES ###############
 #include "../include/Position.h"
-#include <string.h>
 #include "../include/Board.h"
+#include <string.h>
+
 std::ostream& operator<<(std::ostream& os,const Position& pos)
 {
 	const int line_size = (Board::BOARD_SIZE / 4)+1; // 8
