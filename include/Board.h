@@ -6,7 +6,9 @@
 #include "Position.h"
 #include <array>
 class Board{
+public:
     const static int BOARD_SIZE = 32;
+    Board();
 
     Position get_partenza()const;
 
