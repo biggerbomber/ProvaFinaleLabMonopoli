@@ -1,6 +1,7 @@
-#include "../include/MonopolyGame.h"
+
 #include "../include/Board.h"
 #include "../include/Position.h"
+#include "../include/Tile.h"
 #include <iostream>
 
 int main(int argc , char** argv){
@@ -10,5 +11,11 @@ int main(int argc , char** argv){
     for(int i=0;i<Board::BOARD_SIZE;i++){
         std::cout<<Position(i)<<std::endl;
     }
+
+    Tile t(Tile::ANGOLARE);
+
+    std::cout << t;
+
+
 
 }

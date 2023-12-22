@@ -1,5 +1,6 @@
 //@Barbato Alberto 2073961
 #include "../include/Tile.h"
+#include "../include/MonopolyGame.h"
 
 Tile::Tile(Tile::TileType tt) {
   m_tile_type = tt;
@@ -41,7 +42,7 @@ int Tile::get_costo_miglioramento() const {
 
 std::ostream& operator<<(std::ostream& os, const Tile& tile) {
   if (tile.has_proprietario()) {
-    os << "|" << tile.get_tile_type() << tile.get_build_type() << tile.get_proprietario() << "|";
+    os << "|" << tile.get_tile_type() << tile.get_build_type() << static_cast<MonopolyGame::PlayerTag>(tile.get_proprietario()) << "|";
 
   }
   else {
