@@ -3,7 +3,6 @@
 
 #ifndef TILE_H
 #define TILE_H
-#include "Player.h"
 #include <array>
 #include <iostream>
 
