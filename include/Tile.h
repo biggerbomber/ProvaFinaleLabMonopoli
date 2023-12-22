@@ -8,29 +8,37 @@
 
 class Tile{
 public:
-    const static int N_TILE_TYPE=4;
-    enum TileType { ANGOLARE, ECONOMICA, STANDARD, LUSSO};
-    const static int N_BUILD_TYPE=3;
-    enum BuildType { VUOTA, CASA, ALBERGO };
+  static const int N_TILE_TYPE=4;
+  enum TileType { ANGOLARE, ECONOMICA, STANDARD, LUSSO};
+  static const int N_BUILD_TYPE=3;
+  enum BuildType { VUOTA, CASA, ALBERGO };
 
-    const static std::array<int,N_TILE_TYPE> s_costo_tereno;
-    const static std::array<std::array<int,N_TILE_TYPE>,N_BUILD_TYPE> s_costo_miglioramento;
-    const static std::array<std::array<int,N_TILE_TYPE>,N_BUILD_TYPE> s_costo_pernottamento;
+ /* static const std::array<int, N_TILE_TYPE> s_costo_tereno;
+  static const std::array<std::array<int,N_TILE_TYPE>,N_BUILD_TYPE> s_costo_miglioramento;
+  static const std::array<std::array<int,N_TILE_TYPE>,N_BUILD_TYPE> s_costo_pernottamento;
+  */
 
+  Tile(TileType);
 
-    Tile(TileType);
+  TileType get_tile_type() const { return m_tile_type; };
+  BuildType get_build_type() const { return m_build_type; };
+  int get_proprietario() const;
+  int get_costo_terreno() const;
+  int get_costo_pernottamento() const;
+  int get_costo_miglioramento() const;
 
-    TileType get_tile_type() const;
-    BuildType get_build_type() const;
-    //Enum player get
+  void set_tile_type(TileType tt) { m_tile_type = tt; };
+  void set_build_type(BuildType bt) { m_build_type = bt; };
+  void set_proprietario(int prop) { m_posseduta = true; m_proprietario = prop; };
 
-    void set_tile_type(TileType);
-    void set_build_type(BuildType);
-     //Enum player set
+  void rimuovi_propritario() { m_posseduta = false; };
+
+  bool has_proprietario() const { return m_posseduta; };
 private:
-    TileType m_tile_type;
-    BuildType m_build_type;
-    //Da aggiungere referendce all enum di monopli game PROPRIETARIO
+  TileType m_tile_type;
+  BuildType m_build_type;
+  bool m_posseduta{ false };
+  int m_proprietario;
 
 };
 

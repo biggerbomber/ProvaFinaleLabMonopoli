@@ -15,6 +15,8 @@ class Player{
         Position& get_posizione(){return m_posizione;}
         
         int get_budget(){return m_budget;}
+
+        int get_tag() { return m_tag; }
         
         bool paga(int);// se ho abbastanz soldi paga (budget-int) e restituisci true altrimenti false 
 
@@ -24,7 +26,10 @@ class Player{
 
         virtual bool gestisci_casella() =0;
 
+
     protected:
+        
+        int m_tag;
         
         std::vector<Position> m_possedimenti;
         
