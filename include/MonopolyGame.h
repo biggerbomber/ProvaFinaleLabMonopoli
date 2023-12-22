@@ -1,3 +1,5 @@
+//@barbato alberto 2073961
+
 #ifndef MONOPOLYGAME_H
 #define MONOPOLYGAME_H
 #include "Board.h"
@@ -10,7 +12,7 @@ public:
     enum PlayerType {BOT ,HUMAN};
 
     MonopolyGame(PlayerType);
-    void Run();
+    void run();
 private:
     Board m_board;
     std::array<Player,N_PLAYER> m_players;
