@@ -1,10 +1,11 @@
 #ifndef POSITION_H
 #define POSITION_H
+#include <iostream>
 //@Pinton Mattia
 class Position {
 public:
-	Postition(int pos) :m_position{ pos };
-	int get_value() { return m_position };
+	Position(int pos) : m_position{ pos }{};
+	int get_value() { return m_position; };
 private:
 	int m_position{ 0 };
 };
