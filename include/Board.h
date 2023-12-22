@@ -7,7 +7,7 @@
 #include <array>
 class Board{
 public:
-    const static int BOARD_SIZE = 32;
+    const static int BOARD_SIZE = 28;
     Board();
 
     Position get_partenza()const;
