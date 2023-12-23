@@ -17,6 +17,7 @@ public:
 
   MonopolyGame(PlayerType);
   void run();
+  std::shared_ptr<Player> get_player_from_tag(int);
 private:
   Board m_board;
   std::array<std::shared_ptr<Player>,N_PLAYER> m_players;
