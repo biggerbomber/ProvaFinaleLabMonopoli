@@ -6,6 +6,7 @@
 #include "Position.h"
 #include "Tile.h"
 #include <vector>
+#include <memory>
 
 void libera_possedimenti(std::vector<Tile>); //H-F
 
@@ -14,13 +15,13 @@ class Player{
         
         // funzioni in-line
 
-        std::vector<Tile>& get_possedimenti(){return m_possedimenti;}
+        std::vector<std::shared_ptr<Tile>>& get_possedimenti(){return m_possedimenti;}
         
         Position& get_posizione(){return m_posizione;}
         
         int get_budget(){return m_budget;}
 
-        int get_tag() { return m_tag; }
+        std::shared_ptr<Player> get_tag() { return m_tag; }
 
         //funzioni implementate sul file cpp
         
@@ -28,16 +29,16 @@ class Player{
 
         void riscuoti(int); 
 
-        void aggiungi_possedimento(Tile);
+        void aggiungi_possedimento(std::shared_ptr<Tile>);
 
-        virtual bool gestisci_casella(Tile) =0;
+        virtual bool gestisci_casella(std::shared_ptr<Tile>) =0;
 
 
     protected:
         
-        int m_tag;
+        std::shared_ptr<Player> m_tag;
         
-        std::vector<Tile> m_possedimenti;
+        std::vector<std::shared_ptr<Tile>> m_possedimenti;
         
         Position m_posizione;
         

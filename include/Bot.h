@@ -7,8 +7,8 @@
 
 class Bot: public Player {
 public:
-	Bot(int);
-	bool gestisci_casella(Tile);
+	Bot(std::shared_ptr<Player>, Position);
+	bool gestisci_casella(std::shared_ptr<Tile>);
 };
 
 #endif
