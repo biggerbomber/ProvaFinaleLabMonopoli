@@ -17,18 +17,18 @@ void Player::riscuoti(int somma) { // NO-THROW-GUARANTEE se si prova a riscuoter
 	m_budget += somma;
 }
 
-void Player::aggiungi_possedimento(Tile p) {
-	if (paga(p.get_costo_terreno())) {
-		p.set_proprietario(m_tag);
+void Player::aggiungi_possedimento(std::shared_ptr<Tile> p) {
+	if (paga(p->get_costo_terreno())) {
+		p->set_proprietario(m_tag);
 		m_possedimenti.push_back(p);
 	}
 }
 
-void libera_possedimenti(std::vector<Tile> v) {
+void libera_possedimenti(std::vector<std::shared_ptr<Tile>> v) {
 	for (int i = 0; i < v.size(); i++) {
-		v[i].rimuovi_proprietario();
-		v[i].set_build_type(Tile::BuildType::VUOTA);
-		v[i].set_proprietario(-1); //non valido
+		v[i]->rimuovi_proprietario();
+		v[i]->set_build_type(Tile::BuildType::VUOTA);
+		v[i]->set_proprietario(-1); //non valido
 	}
 	v.resize(0);
 }
