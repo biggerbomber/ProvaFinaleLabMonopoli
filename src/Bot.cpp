@@ -2,7 +2,7 @@
 
 #include "../include/Bot.h"
 
-Bot::Bot(std::shared_ptr<Player> tag, Position p) {// problema qui " impossibile fare riferimento al costruttore predefinito player, e' una funzione eliminata"
+Bot::Bot(int tag, Position p) {// problema qui " impossibile fare riferimento al costruttore predefinito player, e' una funzione eliminata"
     m_tag = tag;
     m_posizione = p;
     m_budget = 100; //budget di partenza
@@ -21,7 +21,7 @@ bool Bot::gestisci_casella(std::shared_ptr<Tile> t) {
             }
         }
         else {
-            if (t->get_proprietario() == m_tag) {
+            if (t->get_proprietario()->get_tag() == m_tag) {
                 i = (rand() % 4) + 1;
                 if (i == 1 && t->get_costo_miglioramento()<m_budget) {
                     switch (t->get_build_type()) {

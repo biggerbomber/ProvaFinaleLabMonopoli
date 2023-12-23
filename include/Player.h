@@ -8,7 +8,7 @@
 #include <vector>
 #include <memory>
 
-void libera_possedimenti(std::vector<Tile>); //H-F
+void libera_possedimenti (std::vector<std::shared_ptr<Tile>>); //H-F
 
 class Player{
     public:
@@ -21,7 +21,7 @@ class Player{
         
         int get_budget(){return m_budget;}
 
-        std::shared_ptr<Player> get_tag() { return m_tag; }
+        int get_tag() { return m_tag; }
 
         //funzioni implementate sul file cpp
         
@@ -36,7 +36,7 @@ class Player{
 
     protected:
         
-        std::shared_ptr<Player> m_tag;
+        int m_tag;
         
         std::vector<std::shared_ptr<Tile>> m_possedimenti;
         

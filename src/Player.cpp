@@ -28,7 +28,7 @@ void libera_possedimenti(std::vector<std::shared_ptr<Tile>> v) {
 	for (int i = 0; i < v.size(); i++) {
 		v[i]->rimuovi_proprietario();
 		v[i]->set_build_type(Tile::BuildType::VUOTA);
-		v[i]->set_proprietario(-1); //non valido
+		v[i]->set_proprietario(nullptr); //non valido
 	}
 	v.resize(0);
 }
