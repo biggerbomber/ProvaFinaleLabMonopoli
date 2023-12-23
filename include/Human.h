@@ -7,8 +7,8 @@
 
 class Human : public Player {
 public:
-	Human(int);
-	bool gestisci_casella(Tile);
+	Human(int, Position, MonopolyGame*);
+	bool gestisci_casella(std::shared_ptr<Tile>);
 };
 
 #endif

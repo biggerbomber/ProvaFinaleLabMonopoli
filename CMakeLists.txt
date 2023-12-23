@@ -9,6 +9,7 @@ ADD_EXECUTABLE(monopolyGameTester
    	"./src/Player.cpp"
    	"./src/Position.cpp"
     	"./src/Tile.cpp"
+	"./src/Logger.cpp"
 	"./include/Board.h"
 	"./include/Bot.h"
     	"./include/Human.h"
@@ -16,4 +17,5 @@ ADD_EXECUTABLE(monopolyGameTester
    	"./include/Player.h"
 	"./include/Position.h"
 	"./include/Tile.h"
+	"./include/Logger.h"
 )

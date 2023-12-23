@@ -5,6 +5,7 @@
 #include "Board.h"
 #include "Player.h"
 #include "Tile.h"
+#include "Logger.h"
 #include <iostream>
 #include <memory>
 #include <fstream>
@@ -21,7 +22,7 @@ private:
   Board m_board;
   std::array<std::shared_ptr<Player>,N_PLAYER> m_players;
   std::array<int, N_PLAYER> m_num_turno;
-  std::ofstream m_output_file;
+  Logger m_log;
 };
 
 std::ostream& operator<<(std::ostream&, const MonopolyGame&);
