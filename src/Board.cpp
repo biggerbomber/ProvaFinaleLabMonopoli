@@ -1,4 +1,4 @@
-//board.cpp
+//@Pinton Mattia
 
 //##################### INCLUDES #####################
 #include "../include/Board.h"	 	
