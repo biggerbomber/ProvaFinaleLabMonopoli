@@ -13,7 +13,6 @@ class MonopolyGame{
 public:
   const static int N_PLAYER=4;
   enum PlayerType {BOT ,HUMAN};
-  enum PlayerTag{ALPHA, BETA, GAMMA,DELTA};
 
   MonopolyGame(PlayerType);
   void run();
@@ -26,7 +25,7 @@ private:
 };
 
 std::ostream& operator<<(std::ostream&, const MonopolyGame&);
-std::ostream& operator<<(std::ostream&, const MonopolyGame::PlayerTag&);
+
 
 int roll_dice();
 
