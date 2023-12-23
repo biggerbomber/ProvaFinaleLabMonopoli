@@ -4,9 +4,11 @@
 #define PLAYER_H
 
 #include "Position.h"
+#include "MonopolyGame.h"
 #include "Tile.h"
 #include <vector>
 #include <memory>
+class MonopolyGame;
 
 void libera_possedimenti (std::vector<std::shared_ptr<Tile>>); //H-F
 
@@ -36,15 +38,17 @@ class Player{
 
     protected:
         
-        int m_tag;
+        int m_tag{ -1 };
         
         std::vector<std::shared_ptr<Tile>> m_possedimenti;
         
-        Position m_posizione;
+        Position m_posizione{ 0 };
         
-        int m_budget;
+        int m_budget{ 0 };
         
-        bool eliminato = false;
+        bool eliminato{ false };
+
+        MonopolyGame* mg = nullptr;
 };
 
 #endif

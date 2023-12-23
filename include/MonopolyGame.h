@@ -8,7 +8,7 @@
 #include <iostream>
 #include <memory>
 #include <fstream>
-
+class Player;
 class MonopolyGame{
 public:
   const static int N_PLAYER=4;

@@ -2,10 +2,12 @@
 
 #include "../include/Bot.h"
 
-Bot::Bot(int tag, Position p) {// problema qui " impossibile fare riferimento al costruttore predefinito player, e' una funzione eliminata"
+Bot::Bot(int tag, Position p,MonopolyGame* pmg) {// problema qui " impossibile fare riferimento al costruttore predefinito player, e' una funzione eliminata"
     m_tag = tag;
     m_posizione = p;
     m_budget = 100; //budget di partenza
+    mg = pmg;
+
 }
 
 bool Bot::gestisci_casella(std::shared_ptr<Tile> t) {
