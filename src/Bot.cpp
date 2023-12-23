@@ -17,9 +17,9 @@ bool Bot::gestisci_casella(std::shared_ptr<Tile> t) {
         if (!t->has_proprietario()) {
             srand((unsigned)time(0));
             i = (rand() % 4) + 1;
-
             if (i == 1) { // 1 numero puramente arbitrario ma con P(1)=1/4
                 aggiungi_possedimento(t);
+                
             }
         }
         else {
@@ -45,9 +45,10 @@ bool Bot::gestisci_casella(std::shared_ptr<Tile> t) {
                 if (!paga(t->get_costo_pernottamento())) {
                     eliminato = true;
                     libera_possedimenti(m_possedimenti);
+                    return false;
                 }
             }
         }
     }
-    
+    return true;
 }

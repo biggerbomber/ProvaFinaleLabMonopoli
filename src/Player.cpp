@@ -19,7 +19,7 @@ void Player::riscuoti(int somma) { // NO-THROW-GUARANTEE se si prova a riscuoter
 
 void Player::aggiungi_possedimento(std::shared_ptr<Tile> p) {
 	if (paga(p->get_costo_terreno())) {
-		p->set_proprietario(m_tag);
+		p->set_proprietario(mg->get_player_from_tag(m_tag));
 		m_possedimenti.push_back(p);
 	}
 }
