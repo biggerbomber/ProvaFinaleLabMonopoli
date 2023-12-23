@@ -1,4 +1,4 @@
-//Leonardo Casucci
+//@Casucci Leonardo 2073980
 
 #ifndef PLAYER_H
 #define PLAYER_H
@@ -7,35 +7,43 @@
 #include "Tile.h"
 #include <vector>
 
+void libera_possedimenti(std::vector<Tile>); //H-F
+
 class Player{
     public:
         
-        std::vector<Position>& get_possedimenti(){return m_possedimenti;}
+        // funzioni in-line
+
+        std::vector<Tile>& get_possedimenti(){return m_possedimenti;}
         
         Position& get_posizione(){return m_posizione;}
         
         int get_budget(){return m_budget;}
 
         int get_tag() { return m_tag; }
+
+        //funzioni implementate sul file cpp
         
-        bool paga(int);// se ho abbastanz soldi paga (budget-int) e restituisci true altrimenti false 
+        bool paga(int);
 
-        void riscuoti(int); // budget+int  NO-THROW-GUARANTEE, se int<0 termina senza fare nulla (non devi usare riscutore per pagare)
+        void riscuoti(int); 
 
-        void aggiungi_possedimento(Position);
+        void aggiungi_possedimento(Tile);
 
-        virtual bool gestisci_casella() =0;
+        virtual bool gestisci_casella(Tile) =0;
 
 
     protected:
         
         int m_tag;
         
-        std::vector<Position> m_possedimenti;
+        std::vector<Tile> m_possedimenti;
         
         Position m_posizione;
         
         int m_budget;
+        
+        bool eliminato = false;
 };
 
 #endif

@@ -31,7 +31,7 @@ public:
   void set_build_type(BuildType bt) { m_build_type = bt; };
   void set_proprietario(int prop) { m_posseduta = true; m_proprietario = prop; };
 
-  void rimuovi_propritario() { m_posseduta = false; };
+  void rimuovi_proprietario() { m_posseduta = false; };
 
   bool has_proprietario() const { return m_posseduta; };
 private:
