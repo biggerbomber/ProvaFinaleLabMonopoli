@@ -8,7 +8,7 @@ Tile::Tile(Tile::TileType tt) {
   m_posseduta = false;
 }
 
-int Tile::get_proprietario() const{
+std::shared_ptr<Player> Tile::get_proprietario() const{
   if (has_proprietario()) {
     return m_proprietario;
   }
@@ -19,7 +19,7 @@ int Tile::get_costo_terreno() const {
   return costo_terreno[m_tile_type];
 }
 int Tile::get_costo_pernottamento() const {
-  std::array<std::array<int, Tile::N_BUILD_TYPE>, Tile::N_TILE_TYPE> costo_pernottamento
+  static std::array<std::array<int, Tile::N_BUILD_TYPE>, Tile::N_TILE_TYPE> costo_pernottamento
   { { //vuota,casa,albergo
       {0,0,0}, // terreno angolare
       {0,2,4}, // economico
@@ -30,7 +30,7 @@ int Tile::get_costo_pernottamento() const {
 }
 
 int Tile::get_costo_miglioramento() const {
-  std::array<std::array<int, Tile::N_BUILD_TYPE>, Tile::N_TILE_TYPE> costo_miglioramneto
+  static std::array<std::array<int, Tile::N_BUILD_TYPE>, Tile::N_TILE_TYPE> costo_miglioramneto
   { { //vuota,casa,albergo
       {0,0,0}, // terreno angolare
       {3,3,0}, // economico

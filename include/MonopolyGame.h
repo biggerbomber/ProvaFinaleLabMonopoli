@@ -19,8 +19,8 @@ public:
   void run();
 private:
   Board m_board;
-  std::array<std::unique_ptr<Player>,N_PLAYER> m_players;
-  std::array<int, 4> m_num_turno;
+  std::array<std::shared_ptr<Player>,N_PLAYER> m_players;
+  std::array<int, N_PLAYER> m_num_turno;
   std::ofstream m_output_file;
 };
 

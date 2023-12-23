@@ -12,8 +12,8 @@ public:
 
     Position get_partenza()const;
 
-    const Tile& get_tile(Position) const;
-    Tile& get_tile(Position);
+    const std::shared_ptr<Tile>& get_tile(Position) const;
+    std::shared_ptr<Tile> get_tile(Position);
 
     void set_tile(const Tile&, const Position&);
 
@@ -23,7 +23,7 @@ public:
 
     //da espandere se serve
 private:
-    std::array<Tile,BOARD_SIZE> m_tiles;
+    std::array<std::shared_ptr<Tile>,BOARD_SIZE> m_tiles;
 };
 
 std::ostream operator<<(std::ostream&, const Board&);

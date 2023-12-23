@@ -5,7 +5,8 @@
 #define TILE_H
 #include <array>
 #include <iostream>
-
+#include <memory>
+class Player;
 class Tile{
 public:
   static const int N_TILE_TYPE=4;
@@ -22,14 +23,14 @@ public:
 
   TileType get_tile_type() const { return m_tile_type; };
   BuildType get_build_type() const { return m_build_type; };
-  int get_proprietario() const;
+  std::shared_ptr<Player> get_proprietario() const;
   int get_costo_terreno() const;
   int get_costo_pernottamento() const;
   int get_costo_miglioramento() const;
 
   void set_tile_type(TileType tt) { m_tile_type = tt; };
   void set_build_type(BuildType bt) { m_build_type = bt; };
-  void set_proprietario(int prop) { m_posseduta = true; m_proprietario = prop; };
+  void set_proprietario(std::shared_ptr<Player> prop) { m_posseduta = true; m_proprietario = prop; };
 
   void rimuovi_proprietario() { m_posseduta = false; };
 
@@ -38,8 +39,7 @@ private:
   TileType m_tile_type;
   BuildType m_build_type;
   bool m_posseduta{ false };
-  int m_proprietario;
-
+  std::shared_ptr<Player> m_proprietario;
 };
 
 
