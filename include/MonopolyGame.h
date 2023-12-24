@@ -18,6 +18,7 @@ public:
   MonopolyGame(PlayerType);
   void run();
   void log(Logger::LogType lt, int tag1, Position pos1 = 0, int tag2 = -1, int fiorini = -1);
+  void show();
   std::shared_ptr<Player> get_player_from_tag(int);
 private:
   Board m_board;
