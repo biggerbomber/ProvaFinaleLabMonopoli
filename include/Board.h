@@ -21,12 +21,14 @@ public:
 
     bool is_valid_position(Position) const;
 
+    std::shared_ptr<Tile> get_tile(Position&);
+
     //da espandere se serve
 private:
     std::array<std::shared_ptr<Tile>,BOARD_SIZE> m_tiles;
 };
 
-std::ostream operator<<(std::ostream&, const Board&);
+std::ostream& operator<<(std::ostream&, const Board&);
 
 
 #endif

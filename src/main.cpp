@@ -13,8 +13,9 @@ int main(int argc , char** argv){
     }
 
     Tile t(Tile::ANGOLARE);
-
     std::cout << t;
+
+    Board b();
     t.set_tile_type(Tile::ECONOMICA);
     t.set_build_type(Tile::ALBERGO);
     //t.set_proprietario(3);

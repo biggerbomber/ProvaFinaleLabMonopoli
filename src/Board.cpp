@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <iostream>
 #include <vector>
+#include "../include/Tile.h"
 //##################### COSTRUTTORE #####################
 Board::Board()
 {
@@ -37,4 +38,14 @@ Board::Board()
 		}
 	}
 	
+}
+//##################### FUNZIONI #####################
+std::shared_ptr<Tile> Board::get_tile(Position& p) {
+	return m_tiles[p.get_valore()];
+}
+
+//##################### OUTPUT OSTREAM #####################
+
+std::ostream& operator<<(std::ostream& os, const Board& b) {
+	return os;
 }
