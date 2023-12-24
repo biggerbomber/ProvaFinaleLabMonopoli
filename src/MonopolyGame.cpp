@@ -29,6 +29,11 @@ MonopolyGame::MonopolyGame(MonopolyGame::PlayerType pt) {
 
 
 
+void MonopolyGame::log(Logger::LogType lt, int tag1, Position pos1, int tag2, int fiorini)
+{
+  m_log.log(lt, tag1, pos1, tag2, fiorini);
+}
+
 std::shared_ptr<Player> MonopolyGame::get_player_from_tag(int)
 {
   return std::shared_ptr<Player>(new Bot(0,0,0));
