@@ -12,20 +12,27 @@ Human::Human(int tag, Position p, MonopolyGame* pmg)
 
 bool Human::gestisci_casella(std::shared_ptr<Tile> t)
 {   
-    std::string risposta;
+    std::string risposta="";
     if (t->get_tile_type()!=Tile::TileType::ANGOLARE) {
         if (!t->has_proprietario()) {
             if (t->get_costo_terreno() < m_budget) {
-                std::cout << "Vuoi acquistare il terreno?(Y/N)\n";
-                std::cin >> risposta;
-                if (risposta == "Y") {
-                    paga(t->get_costo_terreno());
-                    aggiungi_possedimento(t);
-                    t->set_proprietario(mg->get_player_from_tag(m_tag));
-                }
-                else if (risposta != "N") {
-                    std::cout << "Risposta non valida.\n";
-                    //contiua a chiedere fino a che la risposta non e' valida + show
+                while (risposta!="N") {
+                    std::cout << "Vuoi acquistare il terreno?(Y/N)\n";
+                    std::cin >> risposta;
+                    if (risposta == "Y") {
+                        aggiungi_possedimento(t);
+                        mg->log(Logger::ACQUISTO_TERRENO, m_tag, m_posizione);
+                        // la modifica della posizione va fatta prima di chiamare gestisci casella senno non funziona
+                        break;
+                    }
+                    else if (risposta != "N") {
+                        if (risposta == "show" && risposta == "SHOW") {
+                            mg->show();
+                        }
+                        else {
+                            std::cout << "Risposta non valida.\n";
+                        }
+                    }
                 }
             }
         }
@@ -35,19 +42,7 @@ bool Human::gestisci_casella(std::shared_ptr<Tile> t)
                 std::cout << "Costruzione attuale: " << t->get_build_type() << " , Costo miglioramento: " << t->get_costo_miglioramento()<<'\n';
                 std::cin >> risposta;
                 if (risposta=="Y") {
-                    switch (t->get_build_type()) {
-                    case Tile::BuildType::VUOTA:
-                        paga(t->get_costo_miglioramento());
-                        t->set_build_type(Tile::BuildType::CASA);
-                        break;
-                    case Tile::BuildType::CASA:
-                        paga(t->get_costo_miglioramento());
-                        t->set_build_type(Tile::BuildType::ALBERGO);
-                        break;
-                    case Tile::BuildType::ALBERGO:
-                        std::cout << "Miglioramento massimo già raggiunto\n";
-                        break;
-                    }
+                    migliora_terreno(mg, t, this);
                 }
                 else if (risposta != "N") {
                     std::cout << "Risposta non valida.\n";
@@ -60,10 +55,12 @@ bool Human::gestisci_casella(std::shared_ptr<Tile> t)
                     t->get_proprietario()->riscuoti(m_budget);
                     paga(m_budget);
                     //devi pagare lo stesso
+                    mg->log(Logger::ELIMINAZIONE, m_tag);
                     return false;
                 }
                 else {
                     t->get_proprietario()->riscuoti(t->get_costo_pernottamento());
+                    mg->log(Logger::PAGAMENTO_PERNOTTAMENTO, m_tag, m_posizione,t->get_proprietario()->get_tag(),t->get_costo_pernottamento());
                 }
             }
         }

@@ -19,26 +19,15 @@ bool Bot::gestisci_casella(std::shared_ptr<Tile> t) {
             i = (rand() % 4) + 1;
             if (i == 1) { // 1 numero puramente arbitrario ma con P(1)=1/4
                 aggiungi_possedimento(t);
-                
+                mg->log(Logger::ACQUISTO_TERRENO, m_tag, m_posizione);
+                // la modifica della posizione va fatta prima di chiamare gestisci casella senno non funziona 
             }
         }
         else {
             if (t->get_proprietario()->get_tag() == m_tag) {
                 i = (rand() % 4) + 1;
                 if (i == 1 && t->get_costo_miglioramento()<m_budget) {
-                    switch (t->get_build_type()) {
-                    case Tile::BuildType::VUOTA :
-                        paga(t->get_costo_miglioramento());
-                        t->set_build_type(Tile::BuildType::CASA);
-                        break;
-                    case Tile::BuildType::CASA :
-                        paga(t->get_costo_miglioramento());
-                        t->set_build_type(Tile::BuildType::ALBERGO);
-                        break;
-                    case Tile::BuildType::ALBERGO :
-                        std::cout << "Miglioramento massimo già raggiunto\n";
-                        break;
-                    }  
+                    migliora_terreno(mg, t, this);
                 }
             }
             else {
@@ -46,10 +35,12 @@ bool Bot::gestisci_casella(std::shared_ptr<Tile> t) {
                     eliminato = true;
                     libera_possedimenti(m_possedimenti);
                     t->get_proprietario()->riscuoti(m_budget);
+                    mg->log(Logger::ELIMINAZIONE, m_tag);
                     return false;
                 }
                 else {
                      t->get_proprietario()->riscuoti(t->get_costo_pernottamento());
+                     mg->log(Logger::PAGAMENTO_PERNOTTAMENTO, m_tag, m_posizione, t->get_proprietario()->get_tag(), t->get_costo_pernottamento());
                 }
             }
         }

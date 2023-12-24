@@ -26,6 +26,8 @@ MonopolyGame::MonopolyGame(MonopolyGame::PlayerType pt) {
 
 }
 
+void MonopolyGame::show(){}
+
 
 
 

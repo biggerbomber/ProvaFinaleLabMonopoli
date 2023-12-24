@@ -8,9 +8,8 @@
 #include "Tile.h"
 #include <vector>
 #include <memory>
-class MonopolyGame;
 
-void libera_possedimenti (std::vector<std::shared_ptr<Tile>>); //H-F
+class MonopolyGame;
 
 class Player{
     public:
@@ -50,5 +49,9 @@ class Player{
 
         MonopolyGame* mg = nullptr;
 };
+
+//H-F
+void libera_possedimenti(std::vector<std::shared_ptr<Tile>>);
+void migliora_terreno(MonopolyGame*, std::shared_ptr<Tile>, Player*);
 
 #endif
