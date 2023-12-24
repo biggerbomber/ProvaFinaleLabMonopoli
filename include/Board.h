@@ -10,7 +10,7 @@ public:
     const static int BOARD_SIZE = 28;
     Board();
 
-    Position get_partenza()const;
+    Position get_partenza()const {return Position(0);}
 
     const std::shared_ptr<Tile>& get_tile(Position) const;
     std::shared_ptr<Tile> get_tile(Position);
