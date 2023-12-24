@@ -45,10 +45,11 @@ bool Bot::gestisci_casella(std::shared_ptr<Tile> t) {
                 if (!paga(t->get_costo_pernottamento())) {
                     eliminato = true;
                     libera_possedimenti(m_possedimenti);
+                    t->get_proprietario()->riscuoti(m_budget);
                     return false;
                 }
                 else {
-                    mg->get_player_from_tag(t->get_proprietario()->get_tag())->riscuoti(t->get_costo_pernottamento());
+                     t->get_proprietario()->riscuoti(t->get_costo_pernottamento());
                 }
             }
         }
