@@ -9,6 +9,7 @@
 //##################### COSTRUTTORE #####################
 Board::Board()
 {
+	std::cout << "\n" << "oggetto creato";
 	static int ECO_TILES = 8;
 	static int STD_TILES = 10;
 	static int LUX_TILES = 6;
@@ -30,14 +31,14 @@ Board::Board()
 
 	for (int i = 0; i < BOARD_SIZE; i++) {
 		if (i % (BOARD_SIZE / 4) == 0) {
-			m_tiles[i] = std::make_shared<Tile>(Tile::TileType::ANGOLARE);
+			this->m_tiles[i] = std::make_shared<Tile>(Tile::TileType::ANGOLARE);
 		}
 		else {
-			m_tiles[i] = std::make_shared<Tile>(shuffledeck.back());
+			this->m_tiles[i] = std::make_shared<Tile>(shuffledeck.back());
 			shuffledeck.pop_back();
 		}
+		
 	}
-	
 }
 //##################### FUNZIONI #####################
 std::shared_ptr<Tile> Board::get_tile(Position& p) {
@@ -47,5 +48,5 @@ std::shared_ptr<Tile> Board::get_tile(Position& p) {
 //##################### OUTPUT OSTREAM #####################
 
 std::ostream& operator<<(std::ostream& os, const Board& b) {
-	return os;
+	
 }
