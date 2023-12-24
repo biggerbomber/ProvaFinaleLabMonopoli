@@ -21,7 +21,7 @@ public:
 
     bool is_valid_position(Position) const;
 
-    std::shared_ptr<Tile> get_tile(Position&);
+    Tile& get_tile(Position& p) { return *(m_tiles[p.get_valore()]); };
 
     //da espandere se serve
 private:
