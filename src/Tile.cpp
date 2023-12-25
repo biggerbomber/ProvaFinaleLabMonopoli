@@ -41,14 +41,7 @@ int Tile::get_costo_miglioramento() const {
 }
 
 std::ostream& operator<<(std::ostream& os, const Tile& tile) {
-  if (tile.has_proprietario()) {
-    os << "|" << tile.get_tile_type() << tile.get_build_type() << (tile.get_proprietario()->get_tag()) << "|";
-
-  }
-  else {
-    os << "|" << tile.get_tile_type() << tile.get_build_type() << "|";
-
-  }
+  os <<tile.get_tile_type() << tile.get_build_type();
   return os;
 }
 
