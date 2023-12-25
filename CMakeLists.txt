@@ -10,6 +10,7 @@ ADD_EXECUTABLE(monopolyGameTester
    	"./src/Position.cpp"
     	"./src/Tile.cpp"
 	"./src/Logger.cpp"
+	"./include/ExpandNamespace.h"
 	"./include/Board.h"
 	"./include/Bot.h"
     	"./include/Human.h"

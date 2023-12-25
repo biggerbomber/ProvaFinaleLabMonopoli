@@ -9,7 +9,8 @@
 #include <iostream>
 #include <memory>
 #include <fstream>
-class Player;
+#include "ExpandNamespace.h"
+
 class MonopolyGame{
 public:
   const static int N_PLAYER=4;
