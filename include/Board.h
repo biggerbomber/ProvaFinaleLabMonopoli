@@ -22,7 +22,7 @@ public:
     bool is_valid_position(Position) const;
 
     std::shared_ptr<Tile> get_tile(Position&);
-
+    //TODO: Funzione PrintBoard che prende un ostream e un array di shared_prt<Player>(Eventualmente a nullptr) per poter stampare le i player o no, a seconda 
     //da espandere se serve
 private:
     std::array<std::shared_ptr<Tile>,BOARD_SIZE> m_tiles;
