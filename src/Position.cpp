@@ -1,8 +1,8 @@
 //@Pinton Mattia
 
 //############### INCLUDES ###############
-#include "../include/Position.h"
-#include "../include/Board.h"
+#include "Position.h"
+#include "Board.h"
 #include <string.h>
 
 std::ostream& operator<<(std::ostream& os,const Position& pos)

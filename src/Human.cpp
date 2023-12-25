@@ -1,6 +1,6 @@
 //@Casucci Leonardo 2073980
 
-#include "../include/Human.h"
+#include "Human.h"
 
 Human::Human(int tag, Position p, MonopolyGame* pmg)
 {

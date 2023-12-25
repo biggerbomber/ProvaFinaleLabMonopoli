@@ -1,6 +1,6 @@
 //@Barbato Alberto 2073961
-#include "../include/Tile.h"
-#include "../include/MonopolyGame.h"
+#include "Tile.h"
+#include "MonopolyGame.h"
 
 Tile::Tile(Tile::TileType tt) {
   m_tile_type = tt;

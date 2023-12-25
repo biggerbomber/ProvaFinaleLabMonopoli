@@ -1,22 +1,9 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8 FATAL_ERROR)
 PROJECT(ProvaFinaleMonopolyBarbatoCasucciPinton LANGUAGES CXX)
-ADD_EXECUTABLE(monopolyGameTester
-	"./src/Board.cpp"
-	"./src/Bot.cpp"
-	"./src/Human.cpp"
-	"./src/main.cpp"
-	"./src/MonopolyGame.cpp"
-   	"./src/Player.cpp"
-   	"./src/Position.cpp"
-    	"./src/Tile.cpp"
-	"./src/Logger.cpp"
-	"./include/ExpandNamespace.h"
-	"./include/Board.h"
-	"./include/Bot.h"
-    	"./include/Human.h"
-	"./include/MonopolyGame.h"
-   	"./include/Player.h"
-	"./include/Position.h"
-	"./include/Tile.h"
-	"./include/Logger.h"
-)
+
+include_directories(include)
+add_library(BoardLib STATIC "./include/Position.h" "./include/Board.h" "./include/Tile.h" "./src/Board.cpp" "./src/Tile.cpp" "./src/Position.cpp")
+add_library(PlayerLib STATIC "./include/Player.h" "./include/Bot.h" "./include/Human.h" "./src/Player.cpp" "./src/Bot.cpp" "./src/Human.cpp" )
+add_library(MonoPolyGameLib STATIC "./include/MonopolyGame.h" "./include/Logger.h" "./src/MonopolyGame.cpp" "./src/Logger.cpp")
+add_executable(monopolyGameTester "./src/main.cpp")
+target_link_libraries(monopolyGameTester BoardLib PlayerLib MonoPolyGameLib)

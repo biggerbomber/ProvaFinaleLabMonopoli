@@ -1,7 +1,7 @@
 //monopolygame.cpp
-#include "../include/MonopolyGame.h"
-#include "../include/Bot.h"
-#include "../include/Human.h"
+#include "MonopolyGame.h"
+#include "Bot.h"
+#include "Human.h"
 #include <memory>
 
 MonopolyGame::MonopolyGame(MonopolyGame::PlayerType pt) {

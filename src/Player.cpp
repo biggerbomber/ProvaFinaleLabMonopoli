@@ -1,6 +1,6 @@
 //@Casucci Leonardo 2073980
 
-#include "../include/Player.h"
+#include "Player.h"
 
 bool Player::paga(int somma) { //metodo che ti da informazioni sulla buona riuscita del pagamento oltre che effettuarlo se possibile
 	if (somma > 0 && somma < m_budget) {

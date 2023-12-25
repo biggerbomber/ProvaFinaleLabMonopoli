@@ -1,6 +1,6 @@
 //@Casucci Leonardo 2073980
 
-#include "../include/Bot.h"
+#include "Bot.h"
 
 Bot::Bot(int tag, Position p,MonopolyGame* pmg) {// problema qui " impossibile fare riferimento al costruttore predefinito player, e' una funzione eliminata"
     m_tag = tag;

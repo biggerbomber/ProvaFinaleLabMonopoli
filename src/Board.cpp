@@ -1,11 +1,11 @@
 //@Pinton Mattia
 
 //##################### INCLUDES #####################
-#include "../include/Board.h"	 	
+#include "Board.h"	 	
 #include <algorithm>
 #include <iostream>
 #include <vector>
-#include "../include/Tile.h"
+#include "Tile.h"
 //##################### COSTRUTTORE #####################
 Board::Board()
 {
