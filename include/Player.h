@@ -45,7 +45,7 @@ class Player{
         
         int m_budget{ 0 };
         
-        bool eliminato{ false };
+        bool m_eliminato{ false };
 
         MonopolyGame* mg = nullptr;
 };

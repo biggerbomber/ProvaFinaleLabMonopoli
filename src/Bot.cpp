@@ -32,7 +32,7 @@ bool Bot::gestisci_casella(std::shared_ptr<Tile> t) {
             }
             else {
                 if (!paga(t->get_costo_pernottamento())) {
-                    eliminato = true;
+                    m_eliminato = true;
                     libera_possedimenti(m_possedimenti);
                     t->get_proprietario()->riscuoti(m_budget);
                     mg->log(Logger::ELIMINAZIONE, m_tag);
