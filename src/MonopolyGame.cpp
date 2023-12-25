@@ -21,9 +21,6 @@ MonopolyGame::MonopolyGame(MonopolyGame::PlayerType pt) {
   for (int i = 1; i < N_PLAYER; i++) {
     m_players[i] = std::make_shared<Bot>(i, m_board.get_partenza(), this);
   }
-
-
-
 }
 
 void MonopolyGame::show(){}
