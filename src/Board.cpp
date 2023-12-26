@@ -57,7 +57,25 @@ std::ostream& operator<<(std::ostream& os, const Board& b) {
 		os << b.m_tiles[i]->get_tile_type();
 		std::cout <<"\n";
 		*/
-		os << b.get_tile(*(new Position(i)));
+		os << *b.get_tile(Position(i));
 	}
 	return os;
+}
+
+std::ostream& Board::print(std::ostream& os, std::vector<...> arr) const {
+	for (int i = 0, p = 0; i < BOARD_SIZE; i++) {
+		os << "|" << *m_tiles[i];
+		while (p < arr.size()) {
+			if (arr[p]) {
+				os << arr[p]->get_tag();
+			}
+
+			p++;
+		}
+		std::cout << "sono qua" << i;
+		p = 0;
+	}
+	return os;
+
+	return os << "|";
 }
