@@ -23,7 +23,7 @@ public:
     std::shared_ptr<Tile> get_tile(Position& p) { return m_tiles[p.get_valore()]; };
     //TODO: Funzione PrintBoard che prende un ostream e un array di shared_prt<Player>(Eventualmente a nullptr) per poter stampare le i player o no, a seconda 
     //da espandere se serve
-    std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>> arr) const;
+   // std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>> arr) const;
 private:
     std::array<std::shared_ptr<Tile>,BOARD_SIZE> m_tiles;
 };

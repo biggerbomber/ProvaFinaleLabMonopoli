@@ -50,26 +50,34 @@ Board::Board()
 //##################### OUTPUT OSTREAM #####################
 
 std::ostream& operator<<(std::ostream& os, const Board& b) {
-	//std::string s;
+	//FUNZIONANTE
+	/*
 	for (int i = 0; i < Board::BOARD_SIZE; i++) {
-		/*
-		std::cout << "casella "<< i<< ":\n";
-		os << b.m_tiles[i]->get_tile_type();
-		std::cout <<"\n";
-		*/
-		os << *b.get_tile(Position(i));
+		os << " |" << *b.get_tile(Position(i));
+		if (b.get_tile(Position(i))->has_proprietario())os << "P| ";
+	}
+	*/
+	for (int i = 14; i < 22; i++) {
+		os << " |" << *b.get_tile(Position(i));
+		if (b.get_tile(Position(i))->has_proprietario())os << "P| ";
+	}
+	for (int i = 0; i < 6; i++) {
+		os << " |" << *b.get_tile(Position(i+8));
+		if (b.get_tile(Position(i+8))->has_proprietario())os << "P| ";
+		os << "                  ";
+		os << " |" << *b.get_tile(Position(i*3-1));
+		if (b.get_tile(Position(i*3-1))->has_proprietario())os << "P| ";
 	}
 	return os;
 }
-
-std::ostream& Board::print(std::ostream& os, std::vector<...> arr) const {
+/*
+std::ostream& Board::print(std::ostream& os, std::vector<int> arr) const {
 	for (int i = 0, p = 0; i < BOARD_SIZE; i++) {
 		os << "|" << *m_tiles[i];
 		while (p < arr.size()) {
 			if (arr[p]) {
 				os << arr[p]->get_tag();
 			}
-
 			p++;
 		}
 		std::cout << "sono qua" << i;
@@ -79,3 +87,4 @@ std::ostream& Board::print(std::ostream& os, std::vector<...> arr) const {
 
 	return os << "|";
 }
+*/
