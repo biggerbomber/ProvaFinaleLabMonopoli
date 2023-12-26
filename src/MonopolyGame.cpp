@@ -1,7 +1,7 @@
 //monopolygame.cpp
-#include "../include/MonopolyGame.h"
-#include "../include/Bot.h"
-#include "../include/Human.h"
+#include "MonopolyGame.h"
+#include "Bot.h"
+#include "Human.h"
 #include <memory>
 
 MonopolyGame::MonopolyGame(MonopolyGame::PlayerType pt) {
@@ -21,13 +21,17 @@ MonopolyGame::MonopolyGame(MonopolyGame::PlayerType pt) {
   for (int i = 1; i < N_PLAYER; i++) {
     m_players[i] = std::make_shared<Bot>(i, m_board.get_partenza(), this);
   }
-
-
-
 }
 
+void MonopolyGame::show(){}
 
 
+
+
+void MonopolyGame::log(Logger::LogType lt, int tag1, Position pos1, int tag2, int fiorini)
+{
+  m_log.log(lt, tag1, pos1, tag2, fiorini);
+}
 
 std::shared_ptr<Player> MonopolyGame::get_player_from_tag(int)
 {

@@ -1,0 +1,6 @@
+- Giocatore 2 e' passato dal via e ha ritirato 20 fiorini
+- Giocatore 4 ha pagato 30 fiorini a giocatore 1 per pernottamento nella casella H1
+- Giocatore 2 ha tirato i dati e ha ottenuto un valore di 12
+- Giocatore 2 e' stato eliminato
+- Giocatore 2 ha migliorato una casa in albergo sul terreno E1
+- Giocatore 2 ha acquistato il terreno A7
