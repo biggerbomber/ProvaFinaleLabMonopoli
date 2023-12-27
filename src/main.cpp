@@ -18,6 +18,11 @@ int main(int argc , char** argv){
     Board b;
 
     std::cout<< b;
+
+    std::cout << "\n\n\n funzione print: \n\n";
+
+    b.print(std::cout, std::vector<std::shared_ptr<Player>>{});
+
     t.set_tile_type(Tile::ECONOMICA);
     t.set_build_type(Tile::ALBERGO);
     //t.set_proprietario(3);

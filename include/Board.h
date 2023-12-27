@@ -4,10 +4,16 @@
 #define BOARD_H
 #include "Tile.h"
 #include "Position.h"
+#include "Player.h"
 #include <array>
 class Board{
 public:
     const static int BOARD_SIZE = 28;
+    const static int ECO_TILES = 8;
+    const static int STD_TILES = 10;
+    const static int LUX_TILES = 6;
+    const static int SIDE_TILES = 4;
+
     Board();
 
     Position get_partenza()const {return Position(0);}

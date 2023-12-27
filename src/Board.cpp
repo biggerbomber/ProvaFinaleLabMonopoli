@@ -10,11 +10,6 @@
 //##################### COSTRUTTORE #####################
 Board::Board()
 {
-	static int ECO_TILES = 8;
-	static int STD_TILES = 10;
-	static int LUX_TILES = 6;
-	static int SIDE_TILES = 4;
-
 	std::vector<Tile::TileType> shuffledeck;
 	std::cout <<"PUSH ARRAY AUX" << "\n";
 	for (int i = 0; i < (BOARD_SIZE-SIDE_TILES); i++) {
@@ -85,18 +80,61 @@ std::ostream& operator<<(std::ostream& os, const Board& b) {
 }
 
 std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>> arr) const {
-	for (int i = 0, p = 0; i < BOARD_SIZE; i++) {
-		os << "|" << *m_tiles[i];
+
+	const int N_ELEM_RIGHE = (BOARD_SIZE / 4)+1; // numero elementi riga in alto e in basso
+	const int N_ELEM_COLONNE = (BOARD_SIZE / 4) - 1; //tutti e 4 gli angoli sono compresi fra gli elementi delle righe
+
+	//STAMPA PRIMA RIGA
+	for (int i = N_ELEM_COLONNE + N_ELEM_RIGHE, p = 0; i < N_ELEM_COLONNE + 2 * N_ELEM_RIGHE; i++) {
+		os << " |" << *m_tiles[i];
 		while (p < arr.size()) {
 			if (arr[p]) {
 				os << arr[p]->get_tag();
 			}
 			p++;
 		}
-		std::cout << "sono qua" << i;
 		p = 0;
+		os << "| ";
 	}
-	return os;
-	
-	return os << "|";
+	os << "\n";
+
+	//STAMPA COLONNE
+	for (int i = 0, c1 = N_ELEM_COLONNE+N_ELEM_RIGHE-1, c2 = N_ELEM_RIGHE*2 + N_ELEM_COLONNE, p = 0;
+		i < N_ELEM_COLONNE; i++) {
+
+		os << " |" << *m_tiles[c1];
+		while (p < arr.size()) {
+			if (arr[p]) {
+				os << arr[p]->get_tag();
+			}
+			p++;
+		}
+		p = 0;
+		os << "|                               ";
+		os << " |" << *m_tiles[c2];
+		while (p < arr.size()) {
+			if (arr[p]) {
+				os << arr[p]->get_tag();
+			}
+			p++;
+		}
+		p = 0;
+		os << "|\n";
+		c1--; 
+		c2++; 
+	}
+
+	//STAMPA ULTIMA RIGA
+	for (int i = N_ELEM_RIGHE-1, p = 0; i >= 0 ; i--) {
+		os << " |" << *m_tiles[i];
+		while (p < arr.size()) {
+			if (arr[p]) {
+				os << arr[p]->get_tag();
+			}
+			p++;
+		}
+		p = 0;
+		os << "| ";
+	}
+	return os<<"\n";
 }
