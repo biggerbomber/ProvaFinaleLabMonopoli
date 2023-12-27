@@ -16,7 +16,10 @@ class MonopolyGame{
 public:
   const static int N_PLAYER=4;
   enum PlayerType {BOT ,HUMAN};
-
+  struct TurnoPlayer {
+    int p_tag;
+    int n_dice;
+  };
   MonopolyGame(PlayerType);
   void run();
   void log(EventType lt, int tag1, Position pos1 = 0, int tag2 = -1, int fiorini = -1);
@@ -33,5 +36,6 @@ std::ostream& operator<<(std::ostream&, const MonopolyGame&);
 
 
 int roll_dice();
+void gestisci_turni(std::array<MonopolyGame::TurnoPlayer, MonopolyGame::N_PLAYER>&, int index_start, int index_end,Logger*);
 
 #endif
