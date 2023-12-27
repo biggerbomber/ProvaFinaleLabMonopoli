@@ -1,13 +1,13 @@
 - Giocatore 0 ha tirato i dati e ha ottenuto un valore di 8
 - Giocatore 1 ha tirato i dati e ha ottenuto un valore di 8
 - Giocatore 2 ha tirato i dati e ha ottenuto un valore di 8
+- Giocatore 3 ha tirato i dati e ha ottenuto un valore di 8
+- Giocatore 0 ha tirato i dati e ha ottenuto un valore di 8
+- Giocatore 1 ha tirato i dati e ha ottenuto un valore di 6
+- Giocatore 2 ha tirato i dati e ha ottenuto un valore di 10
 - Giocatore 3 ha tirato i dati e ha ottenuto un valore di 6
-- Giocatore 0 ha tirato i dati e ha ottenuto un valore di 8
-- Giocatore 1 ha tirato i dati e ha ottenuto un valore di 8
-- Giocatore 2 ha tirato i dati e ha ottenuto un valore di 8
-- Giocatore 0 ha tirato i dati e ha ottenuto un valore di 8
-- Giocatore 1 ha tirato i dati e ha ottenuto un valore di 8
-- Giocatore 0 ha tirato i dati e ha ottenuto un valore di 8
+- Giocatore 1 ha tirato i dati e ha ottenuto un valore di 11
+- Giocatore 3 ha tirato i dati e ha ottenuto un valore di 2
 - Giocatore 2 e' passato dal via e ha ritirato 20 fiorini
 - Giocatore 4 ha pagato 30 fiorini a giocatore 1 per pernottamento nella casella H1
 - Giocatore 2 ha tirato i dati e ha ottenuto un valore di 12

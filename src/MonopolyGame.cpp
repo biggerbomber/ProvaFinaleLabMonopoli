@@ -8,6 +8,7 @@
 #include <memory>
 
 MonopolyGame::MonopolyGame(MonopolyGame::PlayerType pt) {
+  srand((unsigned)time(0));
   switch (pt)
   {
   case MonopolyGame::PlayerType::BOT:
@@ -27,14 +28,19 @@ MonopolyGame::MonopolyGame(MonopolyGame::PlayerType pt) {
 
   std::array<MonopolyGame::TurnoPlayer, N_PLAYER> dadi_inizio;
   for (int i = 0; i < N_PLAYER; i++) {
-    dadi_inizio[i] = { m_players[i]->get_tag(),roll_dice() };
+    dadi_inizio[i] = { m_players[i]->get_tag(), 8};
     m_log.log(EventType::TIRO_DADI, dadi_inizio[i].p_tag, dadi_inizio[i].n_dice);
   }
+  
   gestisci_turni(dadi_inizio, 0, 4, &m_log);
 
 
-
-
+  std::cout << "Turni di Gioco:" << std::endl;
+  for (int i = 0; i < N_PLAYER; i++) {
+    m_num_turno[i] = dadi_inizio[i].p_tag;
+    std::cout << m_num_turno[i] << " ";
+  }
+  std::cout << std::endl;
 }
 
 void MonopolyGame::show(){}
@@ -69,15 +75,24 @@ void gestisci_turni(std::array<MonopolyGame::TurnoPlayer, MonopolyGame::N_PLAYER
 
   std::sort(arr.begin() + index_start, arr.begin() + index_end, compare);
   int range_equal_start = index_start;
-  for (int i = index_start+1; i < index_end; i++) {
-    if (arr[i].n_dice != arr[range_equal_start].n_dice || i+1==index_end) {
+
+  for (int i = index_start+1; i <= index_end; i++) {
+
+    if (i==index_end || (arr[i].n_dice != arr[range_equal_start].n_dice)) {
+      if (range_equal_start + 1 == i) {
+        range_equal_start = i;
+        continue;
+      }
       for (int j = range_equal_start; j < i; j++) {
-        arr[i].n_dice = roll_dice();
+
+        arr[j].n_dice = roll_dice();
+
         l->log(EventType::TIRO_DADI, arr[j].p_tag, arr[j].n_dice);
       }
+
       gestisci_turni(arr, range_equal_start, i, l);
-      range_equal_start = i;
     }
+
   }
 
   return;
