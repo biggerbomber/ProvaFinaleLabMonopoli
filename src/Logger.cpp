@@ -10,7 +10,7 @@ Logger::Logger(){
   std::cout << "Successo\n";
 }
 
-void Logger::log(LogType lt, int tag1,Position pos1, int tag2, int fiorini){
+void Logger::log(EventType lt, int tag1,Position pos1, int tag2, int fiorini){
 
   switch (lt)
   {

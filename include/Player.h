@@ -4,12 +4,11 @@
 #define PLAYER_H
 
 #include "Position.h"
-#include "MonopolyGame.h"
+#include "Logger.h"
 #include "Tile.h"
 #include <vector>
 #include <memory>
 
-class MonopolyGame;
 
 class Player{
     public:
@@ -40,18 +39,20 @@ class Player{
         int m_tag{ -1 };
         
         std::vector<std::shared_ptr<Tile>> m_possedimenti;
-        
+
+        std::shared_ptr<Player>* m_self;
+
         Position m_posizione{ 0 };
         
         int m_budget{ 0 };
         
         bool m_eliminato{ false };
 
-        MonopolyGame* mg = nullptr;
+        Logger* m_log = nullptr;
 };
 
 //H-F
 void libera_possedimenti(std::vector<std::shared_ptr<Tile>>);
-void migliora_terreno(MonopolyGame*, std::shared_ptr<Tile>, Player*);
+void migliora_terreno(Logger*, std::shared_ptr<Tile>, Player*);
 
 #endif

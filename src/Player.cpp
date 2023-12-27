@@ -19,7 +19,7 @@ void Player::riscuoti(int somma) { // NO-THROW-GUARANTEE se si prova a riscuoter
 
 void Player::aggiungi_possedimento(std::shared_ptr<Tile> p) {
 	if (paga(p->get_costo_terreno())) {
-		p->set_proprietario(mg->get_player_from_tag(m_tag));
+		p->set_proprietario(*m_self);
 		m_possedimenti.push_back(p);
 	}
 }
@@ -33,17 +33,17 @@ void libera_possedimenti(std::vector<std::shared_ptr<Tile>> v) {
 	v.resize(0);
 }
 
-void migliora_terreno(MonopolyGame* mg, std::shared_ptr<Tile> t, Player* p) {
+void migliora_terreno(Logger* l, std::shared_ptr<Tile> t, Player* p) {
 	switch (t->get_build_type()) {
 	case Tile::BuildType::VUOTA:
 		p->paga(t->get_costo_miglioramento());
 		t->set_build_type(Tile::BuildType::CASA);
-		mg->log(Logger::COSTRUZIONE_CASA, p->get_tag(), p->get_posizione());
+		l->log(Logger::COSTRUZIONE_CASA, p->get_tag(), p->get_posizione());
 		break;
 	case Tile::BuildType::CASA:
 		p->paga(t->get_costo_miglioramento());
 		t->set_build_type(Tile::BuildType::ALBERGO);
-		mg->log(Logger::COSTRUZIONE_ALBERGO, p->get_tag(), p->get_posizione());
+		l->log(Logger::COSTRUZIONE_ALBERGO, p->get_tag(), p->get_posizione());
 		break;
 	case Tile::BuildType::ALBERGO:
 		std::cout << "Miglioramento massimo già raggiunto\n";

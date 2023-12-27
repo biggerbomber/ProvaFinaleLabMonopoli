@@ -2,12 +2,13 @@
 
 #include "Human.h"
 
-Human::Human(int tag, Position p, MonopolyGame* pmg)
+Human::Human(int tag, Position p,std::shared_ptr<Player>* self, Logger* l)
 {
     m_tag = tag;
     m_posizione = p;
     m_budget = 100; //budget di partenza
-    mg = pmg;
+    m_self = self;
+    m_log = l;
 }
 
 bool Human::gestisci_casella(std::shared_ptr<Tile> t)
