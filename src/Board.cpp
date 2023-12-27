@@ -44,6 +44,84 @@ Board::Board()
 	
 }
 //##################### FUNZIONI #####################
+
+std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>> arr) const {
+
+	const int N_ELEM_RIGHE = (BOARD_SIZE / 4) + 1; // numero elementi riga in alto e in basso
+	const int N_ELEM_COLONNE = (BOARD_SIZE / 4) - 1; //tutti e 4 gli angoli sono compresi fra gli elementi delle righe
+
+	//STAMPA PRIMA RIGA
+	for (int i = N_ELEM_COLONNE + N_ELEM_RIGHE, p = 0; i < N_ELEM_COLONNE + 2 * N_ELEM_RIGHE; i++) {
+		os << " |" << *m_tiles[i];
+		while (p < arr.size()) {
+			if (arr[p] && (i == arr[p]->get_posizione().get_valore())) {
+				os << arr[p]->get_tag();
+			}
+			p++;
+		}
+		p = 0;
+		os << "| ";
+	}
+	os << "\n";
+
+	//STAMPA COLONNE
+	for (int i = 0, c1 = N_ELEM_COLONNE + N_ELEM_RIGHE - 1, c2 = N_ELEM_RIGHE * 2 + N_ELEM_COLONNE, p = 0;
+		i < N_ELEM_COLONNE; i++) {
+
+		os << " |" << *m_tiles[c1];
+		while (p < arr.size()) {
+			if (arr[p] && (c1 == arr[p]->get_posizione().get_valore())) {
+				os << arr[p]->get_tag();
+			}
+			p++;
+		}
+		p = 0;
+		os << "|                                ";
+		os << " |" << *m_tiles[c2];
+		while (p < arr.size()) {
+			if (arr[p] && (c2 == arr[p]->get_posizione().get_valore())) {
+				os << arr[p]->get_tag();
+			}
+			p++;
+		}
+		p = 0;
+		os << "|\n";
+		c1--;
+		c2++;
+	}
+
+	//STAMPA ULTIMA RIGA
+	for (int i = N_ELEM_RIGHE - 1, p = 0; i >= 0; i--) {
+		os << " |" << *m_tiles[i];
+		while (p < arr.size()) {
+			if (arr[p] && (i == arr[p]->get_posizione().get_valore())) {
+				os << arr[p]->get_tag();
+			}
+			p++;
+		}
+		p = 0;
+		os << "| ";
+	}
+	return os << "\n";
+}
+
+bool Board::avanza_e_controlla(Position& p, int n) const {//retsituisce true se si passa dal via
+	int old_pos = p.get_valore();
+	p.set_valore((old_pos + n) % BOARD_SIZE);
+	if (p.get_valore() < old_pos) {
+		return true;
+	}
+	else return false;
+}
+
+bool Board::is_valid_position(Position p) const {
+	if (p.get_valore() > 0 && p.get_valore() < BOARD_SIZE)return true;
+	else return false;
+}
+
+
+
+
 //##################### OUTPUT OSTREAM #####################
 
 std::ostream& operator<<(std::ostream& os, const Board& b) {
@@ -78,78 +156,4 @@ std::ostream& operator<<(std::ostream& os, const Board& b) {
 	}
 	os << "\n\n\n\n";
 	return os;
-}
-
-std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>> arr) const {
-
-	const int N_ELEM_RIGHE = (BOARD_SIZE / 4)+1; // numero elementi riga in alto e in basso
-	const int N_ELEM_COLONNE = (BOARD_SIZE / 4) - 1; //tutti e 4 gli angoli sono compresi fra gli elementi delle righe
-
-	//STAMPA PRIMA RIGA
-	for (int i = N_ELEM_COLONNE + N_ELEM_RIGHE, p = 0; i < N_ELEM_COLONNE + 2 * N_ELEM_RIGHE; i++) {
-		os << " |" << *m_tiles[i];
-		while (p < arr.size()) {
-			if (arr[p] && (i == arr[p]->get_posizione().get_valore())) {
-				os << arr[p]->get_tag();
-			}
-			p++;
-		}
-		p = 0;
-		os << "| ";
-	}
-	os << "\n";
-
-	//STAMPA COLONNE
-	for (int i = 0, c1 = N_ELEM_COLONNE+N_ELEM_RIGHE-1, c2 = N_ELEM_RIGHE*2 + N_ELEM_COLONNE, p = 0;
-		i < N_ELEM_COLONNE; i++) {
-
-		os << " |" << *m_tiles[c1];
-		while (p < arr.size()) {
-			if (arr[p] && (c1 == arr[p]->get_posizione().get_valore())) {
-				os << arr[p]->get_tag();
-			}
-			p++;
-		}
-		p = 0;
-		os << "|                                ";
-		os << " |" << *m_tiles[c2];
-		while (p < arr.size()) {
-			if (arr[p] && (c2 == arr[p]->get_posizione().get_valore())) {
-				os << arr[p]->get_tag();
-			}
-			p++;
-		}
-		p = 0;
-		os << "|\n";
-		c1--; 
-		c2++; 
-	}
-
-	//STAMPA ULTIMA RIGA
-	for (int i = N_ELEM_RIGHE-1, p = 0; i >= 0 ; i--) {
-		os << " |" << *m_tiles[i];
-		while (p < arr.size()) {
-			if (arr[p] && (i == arr[p]->get_posizione().get_valore())) {
-				os << arr[p]->get_tag();
-			}
-			p++;
-		}
-		p = 0;
-		os << "| ";
-	}
-	return os<<"\n";
-}
-
-bool Board::avanza_e_controlla(Position& p, int n) const {//retsituisce true se si passa dal via
-	int old_pos = p.get_valore();
-	p.set_valore((old_pos + n) % BOARD_SIZE);
-	if ( p.get_valore()< old_pos) {
-		return true;
-	}
-	else return false;
-}
-
-bool Board::is_valid_position(Position p) const {
-	if (p.get_valore() > 0 && p.get_valore() < BOARD_SIZE)return true;
-	else return false;
 }
