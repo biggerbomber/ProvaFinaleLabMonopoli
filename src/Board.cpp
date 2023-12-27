@@ -2,6 +2,7 @@
 
 //##################### INCLUDES #####################
 #include "Board.h"	 	
+#include "Player.h"	 	
 #include <algorithm>
 #include <iostream>
 #include <vector>
@@ -57,21 +58,33 @@ std::ostream& operator<<(std::ostream& os, const Board& b) {
 		if (b.get_tile(Position(i))->has_proprietario())os << "P| ";
 	}
 	*/
+	os << "\n\n\n\n";
 	for (int i = 14; i < 22; i++) {
 		os << " |" << *b.get_tile(Position(i));
-		if (b.get_tile(Position(i))->has_proprietario())os << "P| ";
+		if (b.get_tile(Position(i))->has_proprietario())os << "P";
+		os << "| ";
 	}
-	for (int i = 0; i < 6; i++) {
-		os << " |" << *b.get_tile(Position(i+8));
-		if (b.get_tile(Position(i+8))->has_proprietario())os << "P| ";
-		os << "                  ";
-		os << " |" << *b.get_tile(Position(i*3-1));
-		if (b.get_tile(Position(i*3-1))->has_proprietario())os << "P| ";
+	os << "\n";
+	for (int i = 0, c1=13,c2 = 22; i < 6; i++) {
+		os << " |" << *b.get_tile(Position(c1));
+		if (b.get_tile(Position(c1))->has_proprietario())os << "P";
+		os << "|                               ";
+		os << " |" << *b.get_tile(Position(c2));
+		if (b.get_tile(Position(c2))->has_proprietario())os << "P";
+		os << "| \n";
+		c1--;
+		c2++;
 	}
+	for (int i = 7; i >= 0 ; i--) {
+		os << " |" << *b.get_tile(Position(i));
+		if (b.get_tile(Position(i))->has_proprietario())os << "P";
+		os << "| ";
+	}
+	os << "\n\n\n\n";
 	return os;
 }
-/*
-std::ostream& Board::print(std::ostream& os, std::vector<int> arr) const {
+
+std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>> arr) const {
 	for (int i = 0, p = 0; i < BOARD_SIZE; i++) {
 		os << "|" << *m_tiles[i];
 		while (p < arr.size()) {
@@ -84,7 +97,6 @@ std::ostream& Board::print(std::ostream& os, std::vector<int> arr) const {
 		p = 0;
 	}
 	return os;
-
+	
 	return os << "|";
 }
-*/
