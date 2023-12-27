@@ -139,3 +139,17 @@ std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>
 	}
 	return os<<"\n";
 }
+
+bool Board::avanza_e_controlla(Position& p, int n) const {//retsituisce true se si passa dal via
+	int old_pos = p.get_valore();
+	p.set_valore((old_pos + n) % BOARD_SIZE);
+	if ( p.get_valore()< old_pos) {
+		return true;
+	}
+	else return false;
+}
+
+bool Board::is_valid_position(Position p) const {
+	if (p.get_valore() > 0 && p.get_valore() < BOARD_SIZE)return true;
+	else return false;
+}

@@ -20,8 +20,6 @@ public:
 
     const std::shared_ptr<Tile>& get_tile(Position p) const { return m_tiles[p.get_valore()]; };
 
-    void set_tile(const Tile&, const Position&);
-
     bool avanza_e_controlla(Position&,int) const;//retsituisce true se si passa dal via
 
     bool is_valid_position(Position) const;
