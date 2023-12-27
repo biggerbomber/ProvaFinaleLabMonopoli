@@ -7,8 +7,8 @@
 
 class Bot: public Player {
 public:
-	Bot(int, Position,MonopolyGame*);
-	bool gestisci_casella(std::shared_ptr<Tile>);
+	Bot(int, Position);
+	EventType gestisci_casella(std::shared_ptr<Tile>);
 };
 
 #endif

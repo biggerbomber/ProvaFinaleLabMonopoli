@@ -2,15 +2,14 @@
 
 #include "Human.h"
 
-Human::Human(int tag, Position p, MonopolyGame* pmg)
+Human::Human(int tag, Position p)
 {
     m_tag = tag;
     m_posizione = p;
     m_budget = 100; //budget di partenza
-    mg = pmg;
 }
 
-bool Human::gestisci_casella(std::shared_ptr<Tile> t)
+EventType Human::gestisci_casella(std::shared_ptr<Tile> t)
 {   
     std::string risposta="";
     if (t->get_tile_type()!=Tile::TileType::ANGOLARE) {
@@ -20,18 +19,13 @@ bool Human::gestisci_casella(std::shared_ptr<Tile> t)
                     std::cout << "Vuoi acquistare il terreno?(Y/N)\n";
                     std::cin >> risposta;
                     if (risposta == "Y") {
-                        aggiungi_possedimento(t);
-                        mg->log(Logger::ACQUISTO_TERRENO, m_tag, m_posizione);
-                        // la modifica della posizione va fatta prima di chiamare gestisci casella senno non funziona
-                        break;
+                        return EventType::ACQUISTO_TERRENO;
+                    }
+                    else if (risposta == "show" && risposta == "SHOW") {
+                            return EventType::SHOW_COMMAND;
                     }
                     else if (risposta != "N") {
-                        if (risposta == "show" && risposta == "SHOW") {
-                            mg->show();
-                        }
-                        else {
-                            std::cout << "Risposta non valida.\n";
-                        }
+                        std::cout << "Risposta non valida.\n";
                     }
                 }
             }
@@ -41,29 +35,35 @@ bool Human::gestisci_casella(std::shared_ptr<Tile> t)
                 std::cout << "Il terreno e' già in tuo possesso, vuoi migliorarlo?(Y/N)\n";
                 std::cout << "Costruzione attuale: " << t->get_build_type() << " , Costo miglioramento: " << t->get_costo_miglioramento()<<'\n';
                 std::cin >> risposta;
-                if (risposta=="Y") {
-                    migliora_terreno(mg, t, this);
-                }
-                else if (risposta != "N") {
-                    std::cout << "Risposta non valida.\n";
+                while (risposta != "N") {
+                    if (risposta == "Y") {
+                        if (t->get_build_type() == Tile::BuildType::VUOTA) {
+                            return EventType::COSTRUZIONE_CASA;
+                        }
+                        else if (t->get_build_type() == Tile::BuildType::CASA) {
+                            return EventType::COSTRUZIONE_ALBERGO;
+                        }
+                        else {
+                            return EventType::FINE_TURNO;
+                        }
+                    }
+                    else if (risposta == "show" && risposta == "SHOW") {
+                        return EventType::SHOW_COMMAND;
+                    }
+                    else if(risposta!="N") {
+                        std::cout << "Risposta non valida.\n";
+                    }
                 }
             }
             else {
-                if (!paga(t->get_costo_pernottamento())) {
-                    m_eliminato = true;
-                    libera_possedimenti(m_possedimenti);
-                    t->get_proprietario()->riscuoti(m_budget);
-                    paga(m_budget);
-                    //devi pagare lo stesso
-                    mg->log(Logger::ELIMINAZIONE, m_tag);
-                    return false;
+                if (m_budget<t->get_costo_pernottamento()) {
+                    return EventType::ELIMINAZIONE;
                 }
                 else {
-                    t->get_proprietario()->riscuoti(t->get_costo_pernottamento());
-                    mg->log(Logger::PAGAMENTO_PERNOTTAMENTO, m_tag, m_posizione,t->get_proprietario()->get_tag(),t->get_costo_pernottamento());
+                    return EventType::PAGAMENTO_PERNOTTAMENTO;
                 }
             }
         }
     }
-    return true;
+    return EventType::FINE_TURNO; // e' usato quando non devi fare nulla di particolare
 }
