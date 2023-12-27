@@ -22,12 +22,14 @@ MonopolyGame::MonopolyGame(MonopolyGame::PlayerType pt) {
     break;
   }
 
-  for (int i = 1; i < N_PLAYER; i++) {
+  for (int i = 1; i < N_PLAYER; i++)
+  {
     m_players[i] = std::make_shared<Bot>(i, m_board.get_partenza());
   }
 
   std::array<MonopolyGame::TurnoPlayer, N_PLAYER> dadi_inizio;
-  for (int i = 0; i < N_PLAYER; i++) {
+  for (int i = 0; i < N_PLAYER; i++)
+  {
     dadi_inizio[i] = { m_players[i]->get_tag(), 8};
     m_log.log(EventType::TIRO_DADI, dadi_inizio[i].p_tag, dadi_inizio[i].n_dice);
   }
@@ -36,11 +38,18 @@ MonopolyGame::MonopolyGame(MonopolyGame::PlayerType pt) {
 
 
   std::cout << "Turni di Gioco:" << std::endl;
-  for (int i = 0; i < N_PLAYER; i++) {
+  for (int i = 0; i < N_PLAYER; i++)
+  {
     m_num_turno[i] = dadi_inizio[i].p_tag;
     std::cout << m_num_turno[i] << " ";
   }
   std::cout << std::endl;
+}
+
+void MonopolyGame::run()
+{
+
+
 }
 
 void MonopolyGame::show(){}
@@ -65,28 +74,32 @@ int roll_dice()
 
 void gestisci_turni(std::array<MonopolyGame::TurnoPlayer, MonopolyGame::N_PLAYER>& arr, int index_start, int index_end,Logger* l)
 {
-  if (index_start + 1 == index_end) {
+  if (index_start + 1 == index_end)
+  {
     return;
   }
   auto compare = [](const MonopolyGame::TurnoPlayer& lhs,
-                  const MonopolyGame::TurnoPlayer& rhs) -> bool {
+                  const MonopolyGame::TurnoPlayer& rhs) -> bool
+    {
       return lhs.n_dice > rhs.n_dice;
     };
 
   std::sort(arr.begin() + index_start, arr.begin() + index_end, compare);
   int range_equal_start = index_start;
 
-  for (int i = index_start+1; i <= index_end; i++) {
+  for (int i = index_start+1; i <= index_end; i++)
+  {
 
-    if (i==index_end || (arr[i].n_dice != arr[range_equal_start].n_dice)) {
-      if (range_equal_start + 1 == i) {
+    if (i==index_end || (arr[i].n_dice != arr[range_equal_start].n_dice))
+    {
+      if (range_equal_start + 1 == i)
+      {
         range_equal_start = i;
         continue;
       }
-      for (int j = range_equal_start; j < i; j++) {
-
+      for (int j = range_equal_start; j < i; j++)
+      {
         arr[j].n_dice = roll_dice();
-
         l->log(EventType::TIRO_DADI, arr[j].p_tag, arr[j].n_dice);
       }
 
