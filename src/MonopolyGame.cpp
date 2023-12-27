@@ -30,7 +30,7 @@ MonopolyGame::MonopolyGame(MonopolyGame::PlayerType pt) {
   std::array<MonopolyGame::TurnoPlayer, N_PLAYER> dadi_inizio;
   for (int i = 0; i < N_PLAYER; i++)
   {
-    dadi_inizio[i] = { m_players[i]->get_tag(), 8};
+    dadi_inizio[i] = { m_players[i]->get_tag(), roll_dice()};
     m_log.log(EventType::TIRO_DADI, dadi_inizio[i].p_tag, dadi_inizio[i].n_dice);
   }
   
@@ -48,8 +48,93 @@ MonopolyGame::MonopolyGame(MonopolyGame::PlayerType pt) {
 
 void MonopolyGame::run()
 {
+  int num_eliminati = 0;
+  int turno = 0;
+  while (num_eliminati + 1 != N_PLAYER)
+  {
+    turno %= 4;
+    std::vector<std::shared_ptr<Player>>vet(4);
+    for (int i = 0; i < N_PLAYER; i++) {
+      vet[i] = m_players[i];
+    }
+    m_board.print(std::cout, vet);
+    std::shared_ptr<Player>& p_attivo = m_players[m_num_turno[turno]];
+    if (p_attivo->get_eliminato()) {
+      turno++;
+      continue;
+    }
+    int roll = roll_dice();
+    m_log.log(EventType::TIRO_DADI, p_attivo->get_tag(),roll);
 
+    if (m_board.avanza_e_controlla(p_attivo->get_posizione(), roll))
+    {
+      m_log.log(EventType::PASSAGGIO_VIA, p_attivo->get_tag());
+      p_attivo->paga(FIORINI_PASSAGGIO_VIA);
+    }
 
+    m_log.log(EventType::ARRIVO, p_attivo->get_tag(), p_attivo->get_posizione());
+    std::shared_ptr<Tile>& t_attiva = m_board.get_tile(p_attivo->get_posizione());
+
+    EventType ris = EventType::ARRIVO;
+
+    while (ris != EventType::FINE_TURNO && ris!=EventType::ELIMINAZIONE)
+    {
+      ris = p_attivo->gestisci_casella(t_attiva);
+      switch (ris)
+      {
+      case ACQUISTO_TERRENO:
+        gestisci_acquisto_terreno(t_attiva, p_attivo);
+        m_log.log(ris, p_attivo->get_tag(), p_attivo->get_posizione());
+        ris = EventType::FINE_TURNO;
+        break;
+
+      case COSTRUZIONE_CASA:
+        migliora_terreno(ris, t_attiva, p_attivo);
+        m_log.log(ris, p_attivo->get_tag(), p_attivo->get_posizione());
+        ris = EventType::FINE_TURNO;
+        break;
+
+      case COSTRUZIONE_ALBERGO:
+        migliora_terreno(ris, t_attiva, p_attivo);
+        m_log.log(ris, p_attivo->get_tag(), p_attivo->get_posizione());
+        ris = EventType::FINE_TURNO;
+        break;
+
+      case PAGAMENTO_PERNOTTAMENTO:
+        gestisci_pagamento_pernottamento(t_attiva, p_attivo);
+        m_log.log(ris, p_attivo->get_tag(),
+          p_attivo->get_posizione(),
+          t_attiva->get_proprietario()->get_tag(),
+          t_attiva->get_costo_pernottamento());
+        ris = EventType::FINE_TURNO;
+        break;
+
+      case SHOW_COMMAND:
+        show();
+        break;
+
+      case ELIMINAZIONE:
+        gestisci_eliminazione(t_attiva, p_attivo);
+        num_eliminati++;
+        break;
+
+      default:
+        break;
+      }
+    }
+    m_log.log(ris, p_attivo->get_tag(), p_attivo->get_posizione());
+
+    //std::cin.get();
+    turno++;
+  }
+
+  for (int i = 0; i < N_PLAYER; i++) {
+    if(!m_players[i]->get_eliminato())
+    {
+      m_log.log(EventType::VITTORIA, m_players[i]->get_tag());
+      break;
+    }
+  }
 }
 
 void MonopolyGame::show(){}
@@ -104,6 +189,7 @@ void gestisci_turni(std::array<MonopolyGame::TurnoPlayer, MonopolyGame::N_PLAYER
       }
 
       gestisci_turni(arr, range_equal_start, i, l);
+      range_equal_start = i;
     }
 
   }

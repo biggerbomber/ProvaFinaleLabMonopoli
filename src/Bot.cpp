@@ -5,15 +5,13 @@
 Bot::Bot(int tag, Position p) {// problema qui " impossibile fare riferimento al costruttore predefinito player, e' una funzione eliminata"
     m_tag = tag;
     m_posizione = p;
-    m_budget = 100; //budget di partenza
+    m_budget = BUDGET_PARTENZA; //budget di partenza
 }
 
 EventType Bot::gestisci_casella(std::shared_ptr<Tile> t) {
-    srand((unsigned)time(0));
     int i;
     if (t->get_tile_type() != Tile::TileType::ANGOLARE) {
         if (!t->has_proprietario()) {
-            srand((unsigned)time(0));
             i = (rand() % 4) + 1;
             if (i == 1 && t->get_costo_miglioramento() < m_budget) { // 1 numero puramente arbitrario ma con P(1)=1/4
                 return EventType::ACQUISTO_TERRENO;

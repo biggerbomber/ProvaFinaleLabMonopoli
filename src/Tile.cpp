@@ -1,3 +1,4 @@
+#include "Tile.h"
 //@Barbato Alberto 2073961
 #include "Tile.h"
 #include "MonopolyGame.h"
@@ -38,6 +39,14 @@ int Tile::get_costo_miglioramento() const {
       {10,10,0} //lusso
   } };
   return costo_miglioramneto[m_tile_type][m_build_type];
+}
+
+void Tile::set_proprietario(std::shared_ptr<Player> prop)
+{
+  if (prop) {
+    m_posseduta = true;
+  }
+  m_proprietario = prop;
 }
 
 std::ostream& operator<<(std::ostream& os, const Tile& tile) {

@@ -6,7 +6,7 @@ Human::Human(int tag, Position p)
 {
     m_tag = tag;
     m_posizione = p;
-    m_budget = 100; //budget di partenza
+    m_budget = BUDGET_PARTENZA; //budget di partenza
 }
 
 EventType Human::gestisci_casella(std::shared_ptr<Tile> t)

@@ -14,12 +14,14 @@ class Player{
     public:
         
         // funzioni in-line
-
+        const static int BUDGET_PARTENZA = 1000;
         std::vector<std::shared_ptr<Tile>>& get_possedimenti(){return m_possedimenti;}
         
         Position& get_posizione(){return m_posizione;}
         
         int get_budget(){return m_budget;}
+
+        bool get_eliminato() { return m_eliminato; }
 
         int get_tag() { return m_tag; }
 
