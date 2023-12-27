@@ -50,6 +50,7 @@ void MonopolyGame::run()
 {
   int num_eliminati = 0;
   int turno = 0;
+  int numturni = 0;
   while (num_eliminati + 1 != N_PLAYER)
   {
     turno %= 4;
@@ -126,6 +127,7 @@ void MonopolyGame::run()
 
     //std::cin.get();
     turno++;
+    numturni++;
   }
 
   for (int i = 0; i < N_PLAYER; i++) {
@@ -135,6 +137,7 @@ void MonopolyGame::run()
       break;
     }
   }
+  std::cout << "Numero turni : " << numturni << std::endl;
 }
 
 void MonopolyGame::show(){}
