@@ -2,7 +2,8 @@
 
 //##################### INCLUDES #####################
 #include "Board.h"	 	
-#include "Player.h"	 	
+#include "Player.h"
+#include "Position.h"
 #include <algorithm>
 #include <iostream>
 #include <vector>
@@ -88,7 +89,7 @@ std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>
 	for (int i = N_ELEM_COLONNE + N_ELEM_RIGHE, p = 0; i < N_ELEM_COLONNE + 2 * N_ELEM_RIGHE; i++) {
 		os << " |" << *m_tiles[i];
 		while (p < arr.size()) {
-			if (arr[p]) {
+			if (arr[p] && (i == arr[p]->get_posizione().get_valore())) {
 				os << arr[p]->get_tag();
 			}
 			p++;
@@ -104,16 +105,16 @@ std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>
 
 		os << " |" << *m_tiles[c1];
 		while (p < arr.size()) {
-			if (arr[p]) {
+			if (arr[p] && (c1 == arr[p]->get_posizione().get_valore())) {
 				os << arr[p]->get_tag();
 			}
 			p++;
 		}
 		p = 0;
-		os << "|                               ";
+		os << "|                                ";
 		os << " |" << *m_tiles[c2];
 		while (p < arr.size()) {
-			if (arr[p]) {
+			if (arr[p] && (c2 == arr[p]->get_posizione().get_valore())) {
 				os << arr[p]->get_tag();
 			}
 			p++;
@@ -128,7 +129,7 @@ std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>
 	for (int i = N_ELEM_RIGHE-1, p = 0; i >= 0 ; i--) {
 		os << " |" << *m_tiles[i];
 		while (p < arr.size()) {
-			if (arr[p]) {
+			if (arr[p] && (i == arr[p]->get_posizione().get_valore())) {
 				os << arr[p]->get_tag();
 			}
 			p++;

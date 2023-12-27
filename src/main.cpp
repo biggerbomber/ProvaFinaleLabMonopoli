@@ -1,7 +1,9 @@
-#include "../include/MonopolyGame.h"
-#include "../include/Board.h"
-#include "../include/Position.h"
-#include "../include/Tile.h"
+#include "MonopolyGame.h"
+#include "Board.h"
+#include "Position.h"
+#include "Tile.h"
+#include "Human.h"
+#include "Bot.h"
 #include <iostream>
 
 int main(int argc , char** argv){
@@ -20,8 +22,12 @@ int main(int argc , char** argv){
     std::cout<< b;
 
     std::cout << "\n\n\n funzione print: \n\n";
+    Human p(1, 1);
+    Bot b1(2, 14);
+    Bot b2(3, 22);
 
-    b.print(std::cout, std::vector<std::shared_ptr<Player>>{});
+    std::vector<std::shared_ptr<Player>> vec{ std::make_shared<Human>(p), std::make_shared<Bot>(b1), std::make_shared<Bot>(b2), nullptr};
+    b.print(std::cout, vec);
 
     t.set_tile_type(Tile::ECONOMICA);
     t.set_build_type(Tile::ALBERGO);
