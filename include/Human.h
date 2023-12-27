@@ -7,8 +7,8 @@
 
 class Human : public Player {
 public:
-	Human(int, Position,std::shared_ptr<Player>*, Logger*);
-	bool gestisci_casella(std::shared_ptr<Tile>);
+	Human(int, Position);
+	EventType gestisci_casella(std::shared_ptr<Tile>);
 };
 
 #endif

@@ -4,8 +4,8 @@
 #define PLAYER_H
 
 #include "Position.h"
-#include "Logger.h"
 #include "Tile.h"
+#include "EventType.h" 
 #include <vector>
 #include <memory>
 
@@ -23,6 +23,10 @@ class Player{
 
         int get_tag() { return m_tag; }
 
+        void set_posizione(Position p) { m_posizione = p; }
+
+        void set_eliminato(bool b) { m_eliminato = b; }
+
         //funzioni implementate sul file cpp
         
         bool paga(int);
@@ -31,7 +35,7 @@ class Player{
 
         void aggiungi_possedimento(std::shared_ptr<Tile>);
 
-        virtual bool gestisci_casella(std::shared_ptr<Tile>) =0;
+        virtual EventType gestisci_casella(std::shared_ptr<Tile>) =0;
 
 
     protected:
@@ -40,19 +44,16 @@ class Player{
         
         std::vector<std::shared_ptr<Tile>> m_possedimenti;
 
-        std::shared_ptr<Player>* m_self;
-
         Position m_posizione{ 0 };
         
         int m_budget{ 0 };
         
         bool m_eliminato{ false };
 
-        Logger* m_log = nullptr;
 };
 
 //H-F
-void libera_possedimenti(std::vector<std::shared_ptr<Tile>>);
-void migliora_terreno(Logger*, std::shared_ptr<Tile>, Player*);
+void libera_possedimenti(std::vector<std::shared_ptr<Tile>>&);
+void migliora_terreno(EventType, std::shared_ptr<Tile>, Player*);
 
 #endif

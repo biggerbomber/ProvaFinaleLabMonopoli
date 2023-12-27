@@ -1,6 +1,7 @@
 //@Casucci Leonardo 2073980
 
 #include "Player.h"
+#include "Logger.h"
 
 bool Player::paga(int somma) { //metodo che ti da informazioni sulla buona riuscita del pagamento oltre che effettuarlo se possibile
 	if (somma > 0 && somma < m_budget) {
@@ -17,11 +18,8 @@ void Player::riscuoti(int somma) { // NO-THROW-GUARANTEE se si prova a riscuoter
 	m_budget += somma;
 }
 
-void Player::aggiungi_possedimento(std::shared_ptr<Tile> p) {
-	if (paga(p->get_costo_terreno())) {
-		p->set_proprietario(*m_self);
+void Player::aggiungi_possedimento(std::shared_ptr<Tile> p) {//non fa controlli
 		m_possedimenti.push_back(p);
-	}
 }
 
 void libera_possedimenti(std::vector<std::shared_ptr<Tile>> v) {
@@ -33,20 +31,17 @@ void libera_possedimenti(std::vector<std::shared_ptr<Tile>> v) {
 	v.resize(0);
 }
 
-void migliora_terreno(Logger* l, std::shared_ptr<Tile> t, Player* p) {
-	switch (t->get_build_type()) {
-	case Tile::BuildType::VUOTA:
+void migliora_terreno(EventType e,std::shared_ptr<Tile> t, Player* p) {
+	switch (e) {
+	case EventType::COSTRUZIONE_CASA:
 		p->paga(t->get_costo_miglioramento());
 		t->set_build_type(Tile::BuildType::CASA);
-		l->log(Logger::COSTRUZIONE_CASA, p->get_tag(), p->get_posizione());
 		break;
-	case Tile::BuildType::CASA:
+	case EventType::COSTRUZIONE_ALBERGO:
 		p->paga(t->get_costo_miglioramento());
 		t->set_build_type(Tile::BuildType::ALBERGO);
-		l->log(Logger::COSTRUZIONE_ALBERGO, p->get_tag(), p->get_posizione());
 		break;
-	case Tile::BuildType::ALBERGO:
-		std::cout << "Miglioramento massimo già raggiunto\n";
+	default:
 		break;
 	}
 }
