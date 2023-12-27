@@ -22,7 +22,9 @@ void Player::aggiungi_possedimento(std::shared_ptr<Tile> p) {//non fa controlli
 		m_possedimenti.push_back(p);
 }
 
-void libera_possedimenti(std::vector<std::shared_ptr<Tile>> v) {
+//H-F
+
+void libera_possedimenti(std::vector<std::shared_ptr<Tile>>& v) {
 	for (int i = 0; i < v.size(); i++) {
 		v[i]->rimuovi_proprietario();
 		v[i]->set_build_type(Tile::BuildType::VUOTA);
@@ -31,7 +33,7 @@ void libera_possedimenti(std::vector<std::shared_ptr<Tile>> v) {
 	v.resize(0);
 }
 
-void migliora_terreno(EventType e,std::shared_ptr<Tile> t, Player* p) {
+void migliora_terreno(EventType e,std::shared_ptr<Tile> t, std::shared_ptr<Player>p ) {
 	switch (e) {
 	case EventType::COSTRUZIONE_CASA:
 		p->paga(t->get_costo_miglioramento());
@@ -44,4 +46,22 @@ void migliora_terreno(EventType e,std::shared_ptr<Tile> t, Player* p) {
 	default:
 		break;
 	}
+}
+
+void gestisci_acquisto_terreno(std::shared_ptr<Tile> t, std::shared_ptr<Player> p) {
+	p->paga(t->get_costo_terreno());
+	p->aggiungi_possedimento(t);
+	t->set_proprietario(p);
+}
+
+void gestisci_pagamento_pernottamento(std::shared_ptr<Tile> t, std::shared_ptr<Player> p) {
+	p->paga(t->get_costo_pernottamento());
+	t->get_proprietario()->riscuoti(t->get_costo_pernottamento());
+}
+
+void gestisci_eliminazione(std::shared_ptr<Tile> t, std::shared_ptr<Player> p){
+	t->get_proprietario()->riscuoti(p->get_budget()); //il proprietario della tile riscuote tutto quello che puo' riscuotere
+	p->paga(p->get_budget()); //setto il budget del giocatore a 0
+	p->set_eliminato(true);
+	libera_possedimenti(p->get_possedimenti());
 }

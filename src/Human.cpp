@@ -37,15 +37,18 @@ EventType Human::gestisci_casella(std::shared_ptr<Tile> t)
                 std::cin >> risposta;
                 while (risposta != "N") {
                     if (risposta == "Y") {
-                        if (t->get_build_type() == Tile::BuildType::VUOTA) {
-                            return EventType::COSTRUZIONE_CASA;
+                        if (t->get_costo_miglioramento() < m_budget) {
+                            if (t->get_build_type() == Tile::BuildType::VUOTA) {
+                                return EventType::COSTRUZIONE_CASA;
+                            }
+                            else if (t->get_build_type() == Tile::BuildType::CASA) {
+                                return EventType::COSTRUZIONE_ALBERGO;
+                            }
+                            else {
+                                return EventType::FINE_TURNO;
+                            }
                         }
-                        else if (t->get_build_type() == Tile::BuildType::CASA) {
-                            return EventType::COSTRUZIONE_ALBERGO;
-                        }
-                        else {
-                            return EventType::FINE_TURNO;
-                        }
+                        return EventType::FINE_TURNO;
                     }
                     else if (risposta == "show" && risposta == "SHOW") {
                         return EventType::SHOW_COMMAND;

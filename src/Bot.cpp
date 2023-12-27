@@ -15,7 +15,7 @@ EventType Bot::gestisci_casella(std::shared_ptr<Tile> t) {
         if (!t->has_proprietario()) {
             srand((unsigned)time(0));
             i = (rand() % 4) + 1;
-            if (i == 1) { // 1 numero puramente arbitrario ma con P(1)=1/4
+            if (i == 1 && t->get_costo_miglioramento() < m_budget) { // 1 numero puramente arbitrario ma con P(1)=1/4
                 return EventType::ACQUISTO_TERRENO;
             }
         }
