@@ -32,11 +32,11 @@ Board::Board()
 
 	for (int i = 0; i < BOARD_SIZE; i++) {
 		if (i % (BOARD_SIZE / 4) == 0) {
-			m_tiles[i] = std::make_shared<Tile>(Tile::TileType::ANGOLARE);
+			m_tiles[i] = std::make_shared<Tile>(Tile::TileType::ANGOLARE,Position(i));
 			std::cout << "(A)";
 		}
 		else {
-			m_tiles[i] = std::make_shared<Tile>(shuffledeck.back());
+			m_tiles[i] = std::make_shared<Tile>(shuffledeck.back(),Position(i));
 			std::cout << shuffledeck.back();
 			shuffledeck.pop_back();
 		}

@@ -140,10 +140,43 @@ void MonopolyGame::run()
   std::cout << "Numero turni : " << numturni << std::endl;
 }
 
-void MonopolyGame::show(){}
+void MonopolyGame::show(){
+  std::vector<std::shared_ptr<Player>> temp;
+  for (int i = 0; i < N_PLAYER; i++) {
+    if (!m_players[i]->get_eliminato())
+    {
+      temp.push_back(m_players[i]);
+    }
+  }
+  m_board.print(std::cout, temp);
 
+  stampa_possedimenti();
+  stampa_fiorini();
+}
 
+void MonopolyGame::stampa_possedimenti() {
+  std::cout << "Possedimenti per Giocatore: " << std::endl;
+  for (int i = 0; i < N_PLAYER; i++)
+  {
+    std::cout << "Giocatore " << i << ":";
+    std::vector<std::shared_ptr<Tile>> poss = m_players[i]->get_possedimenti();
+    for (int i = 0; i < poss.size(); i++)
+    {
+      std::cout << " " << poss[i]->get_position();
+    }
+    std::cout << std::endl;
+  }
+}
 
+void MonopolyGame::stampa_fiorini()
+{
+  std::cout << "Fiorini per Giocatore: " << std::endl;
+  for (int i = 0; i < N_PLAYER; i++)
+  {
+    std::cout << "Giocatore " << i << ": " << m_players[i]->get_budget() << " fiorini"<<std::endl;
+  }
+
+}
 
 void MonopolyGame::log(EventType lt, int tag1, Position pos1, int tag2, int fiorini)
 {

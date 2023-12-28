@@ -21,7 +21,7 @@ EventType Human::gestisci_casella(std::shared_ptr<Tile> t)
                     if (risposta == "Y") {
                         return EventType::ACQUISTO_TERRENO;
                     }
-                    else if (risposta == "show" && risposta == "SHOW") {
+                    else if (risposta == "show" || risposta == "SHOW") {
                             return EventType::SHOW_COMMAND;
                     }
                     else if (risposta != "N") {
@@ -50,7 +50,7 @@ EventType Human::gestisci_casella(std::shared_ptr<Tile> t)
                         }
                         return EventType::FINE_TURNO;
                     }
-                    else if (risposta == "show" && risposta == "SHOW") {
+                    else if (risposta == "show" || risposta == "SHOW") {
                         return EventType::SHOW_COMMAND;
                     }
                     else if(risposta!="N") {

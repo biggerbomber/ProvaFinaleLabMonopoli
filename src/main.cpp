@@ -7,7 +7,7 @@
 #include <iostream>
 
 int main(int argc , char** argv){
-    MonopolyGame m(MonopolyGame::PlayerType::BOT);
+    MonopolyGame m(MonopolyGame::PlayerType::HUMAN);
 
     m.run();
 

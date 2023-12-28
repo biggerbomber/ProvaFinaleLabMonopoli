@@ -3,8 +3,9 @@
 #include "Tile.h"
 #include "MonopolyGame.h"
 
-Tile::Tile(Tile::TileType tt) {
-  m_tile_type = tt;
+Tile::Tile(Tile::TileType tt, Position pos) 
+      :m_tile_type{ tt }, m_pos{ pos }
+{
   m_build_type = Tile::BuildType::VUOTA;
   m_posseduta = false;
 }

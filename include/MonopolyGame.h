@@ -25,6 +25,8 @@ public:
   void run();
   void log(EventType lt, int tag1, Position pos1 = 0, int tag2 = -1, int fiorini = -1);
   void show();
+  void stampa_possedimenti();
+  void stampa_fiorini();
   std::shared_ptr<Player> get_player_from_tag(int);
 private:
   Board m_board;
