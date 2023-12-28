@@ -25,7 +25,7 @@ public:
 
   TileType get_tile_type() const { return m_tile_type; };
   BuildType get_build_type() const { return m_build_type; };
-  std::shared_ptr<Player> get_proprietario() const;
+  int get_proprietario() const;
   int get_costo_terreno() const;
   int get_costo_pernottamento() const;
   int get_costo_miglioramento() const;
@@ -43,7 +43,7 @@ private:
   BuildType m_build_type;
   Position m_pos;
   bool m_posseduta{ false };
-  std::shared_ptr<Player> m_proprietario;
+  int m_proprietario;
 };
 
 

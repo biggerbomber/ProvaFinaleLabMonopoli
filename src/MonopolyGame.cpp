@@ -103,10 +103,11 @@ void MonopolyGame::run()
         break;
 
       case PAGAMENTO_PERNOTTAMENTO:
-        gestisci_pagamento_pernottamento(t_attiva, p_attivo);
+        gestisci_pagamento_pernottamento(t_attiva, p_attivo,
+                                         get_player_from_tag(t_attiva->get_proprietario()));
         m_log.log(ris, p_attivo->get_tag(),
           p_attivo->get_posizione(),
-          t_attiva->get_proprietario()->get_tag(),
+          t_attiva->get_proprietario(),
           t_attiva->get_costo_pernottamento());
         ris = EventType::FINE_TURNO;
         break;
@@ -116,7 +117,8 @@ void MonopolyGame::run()
         break;
 
       case ELIMINAZIONE:
-        gestisci_eliminazione(t_attiva, p_attivo);
+        gestisci_eliminazione(t_attiva, p_attivo,
+                              get_player_from_tag(t_attiva->get_proprietario()));
         num_eliminati++;
         break;
 

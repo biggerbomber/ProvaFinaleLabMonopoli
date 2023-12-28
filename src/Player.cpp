@@ -54,14 +54,14 @@ void gestisci_acquisto_terreno(std::shared_ptr<Tile> t, std::shared_ptr<Player> 
 	t->set_proprietario(p);
 }
 
-void gestisci_pagamento_pernottamento(std::shared_ptr<Tile> t, std::shared_ptr<Player> p) {
+void gestisci_pagamento_pernottamento(std::shared_ptr<Tile> t, std::shared_ptr<Player> p, std::shared_ptr<Player> p_prop) {
 	p->paga(t->get_costo_pernottamento());
-	t->get_proprietario()->riscuoti(t->get_costo_pernottamento());
+	p_prop->riscuoti(t->get_costo_pernottamento());
 }
 
-void gestisci_eliminazione(std::shared_ptr<Tile> t, std::shared_ptr<Player> p){
-	t->get_proprietario()->riscuoti(p->get_budget()); //il proprietario della tile riscuote tutto quello che puo' riscuotere
-	p->paga(p->get_budget()); //setto il budget del giocatore a 0
-	p->set_eliminato(true);
-	libera_possedimenti(p->get_possedimenti());
+void gestisci_eliminazione(std::shared_ptr<Tile> t, std::shared_ptr<Player> p_eliminato, std::shared_ptr<Player> p_prop){
+	p_prop->riscuoti(p_eliminato->get_budget()); //il proprietario della tile riscuote tutto quello che puo' riscuotere
+	p_eliminato->paga(p_eliminato->get_budget()); //setto il budget del giocatore a 0
+	p_eliminato->set_eliminato(true);
+	libera_possedimenti(p_eliminato->get_possedimenti());
 }

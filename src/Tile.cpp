@@ -10,7 +10,7 @@ Tile::Tile(Tile::TileType tt, Position pos)
   m_posseduta = false;
 }
 
-std::shared_ptr<Player> Tile::get_proprietario() const{
+int Tile::get_proprietario() const{
   if (has_proprietario()) {
     return m_proprietario;
   }
@@ -46,8 +46,8 @@ void Tile::set_proprietario(std::shared_ptr<Player> prop)
 {
   if (prop) {
     m_posseduta = true;
+    m_proprietario = prop->get_tag();
   }
-  m_proprietario = prop;
 }
 
 std::ostream& operator<<(std::ostream& os, const Tile& tile) {
