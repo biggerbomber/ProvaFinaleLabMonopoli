@@ -9,6 +9,7 @@
 
 MonopolyGame::MonopolyGame(MonopolyGame::PlayerType pt) {
   srand((unsigned)time(0));
+  m_game_type = pt;
   switch (pt)
   {
   case MonopolyGame::PlayerType::BOT:
@@ -70,11 +71,11 @@ void MonopolyGame::run()
     if (m_board.avanza_e_controlla(p_attivo->get_posizione(), roll))
     {
       m_log.log(EventType::PASSAGGIO_VIA, p_attivo->get_tag());
-      p_attivo->paga(FIORINI_PASSAGGIO_VIA);
+      p_attivo->riscuoti(FIORINI_PASSAGGIO_VIA);
     }
 
     m_log.log(EventType::ARRIVO, p_attivo->get_tag(), p_attivo->get_posizione());
-    std::shared_ptr<Tile>& t_attiva = m_board.get_tile(p_attivo->get_posizione());
+    std::shared_ptr<Tile> t_attiva = m_board.get_tile(p_attivo->get_posizione());
 
     EventType ris = EventType::ARRIVO;
 
@@ -128,13 +129,43 @@ void MonopolyGame::run()
     //std::cin.get();
     turno++;
     numturni++;
-  }
-
-  for (int i = 0; i < N_PLAYER; i++) {
-    if(!m_players[i]->get_eliminato())
-    {
-      m_log.log(EventType::VITTORIA, m_players[i]->get_tag());
+    if (numturni >= MAX_TURNI) {
       break;
+    }
+  }
+  if (numturni >= MAX_TURNI) {
+    std::vector<int> pos_max_fiorini;
+    int max_fiorini = -1;
+    for (int i = 0; i < N_PLAYER; i++) {
+      if (!m_players[i]->get_eliminato()){
+        if (m_players[i]->get_budget() > max_fiorini) {
+          pos_max_fiorini.resize(0);
+          pos_max_fiorini.push_back(i);
+          max_fiorini = m_players[i]->get_budget();
+        }
+        else if (m_players[i]->get_budget() == max_fiorini) {
+          pos_max_fiorini.push_back(i);
+        }
+      }
+    }
+
+    std::cout << "Max turni raggiunto, la vittoria e' di : ";
+    for (int i = 0; i < pos_max_fiorini.size(); i++) {
+      std::cout << i;
+      if (i != pos_max_fiorini.size() - 1) {
+        std::cout << " e ";
+      }
+    }
+    std::cout << " con " << max_fiorini << " fiorini" << std::endl;
+  }
+  else
+  {
+    for (int i = 0; i < N_PLAYER; i++) {
+      if (!m_players[i]->get_eliminato())
+      {
+        m_log.log(EventType::VITTORIA, m_players[i]->get_tag());
+        break;
+      }
     }
   }
   std::cout << "Numero turni : " << numturni << std::endl;

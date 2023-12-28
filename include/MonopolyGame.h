@@ -16,6 +16,7 @@ class MonopolyGame{
 public:
   const static int N_PLAYER=4;
   const static int FIORINI_PASSAGGIO_VIA = 20;
+  const static int MAX_TURNI=1000;
   enum PlayerType {BOT ,HUMAN};
   struct TurnoPlayer {
     int p_tag;
@@ -33,6 +34,7 @@ private:
   std::array<std::shared_ptr<Player>,N_PLAYER> m_players;
   std::array<int, N_PLAYER> m_num_turno;
   Logger m_log;
+  PlayerType m_game_type;
 };
 
 std::ostream& operator<<(std::ostream&, const MonopolyGame&);
