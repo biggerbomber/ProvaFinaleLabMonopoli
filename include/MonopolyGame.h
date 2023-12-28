@@ -16,7 +16,7 @@ class MonopolyGame{
 public:
   const static int N_PLAYER=4;
   const static int FIORINI_PASSAGGIO_VIA = 20;
-  const static int MAX_TURNI=1000;
+  const static int MAX_TURNI=100;
   enum PlayerType {BOT ,HUMAN};
   struct TurnoPlayer {
     int p_tag;

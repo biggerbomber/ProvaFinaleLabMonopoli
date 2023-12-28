@@ -12,32 +12,32 @@
 Board::Board()
 {
 	std::vector<Tile::TileType> shuffledeck;
-	std::cout <<"PUSH ARRAY AUX" << "\n";
+	//std::cout <<"PUSH ARRAY AUX" << "\n";
 	for (int i = 0; i < (BOARD_SIZE-SIDE_TILES); i++) {
 		if (i < ECO_TILES) {
 			shuffledeck.push_back(Tile::TileType::ECONOMICA);
-			std::cout << "E ";
+			//std::cout << "E ";
 		}
 		else if (i < STD_TILES+ECO_TILES ) {
 			shuffledeck.push_back(Tile::TileType::STANDARD);
-			std::cout << "S ";
+			//std::cout << "S ";
 		}
 		else{
 			shuffledeck.push_back(Tile::TileType::LUSSO);
-			std::cout << "L ";
+			//std::cout << "L ";
 		}
 	}
-	std::cout << "\n\n SHUFFLE \n";
+	//std::cout << "\n\n SHUFFLE \n";
 	std::random_shuffle(shuffledeck.begin(), shuffledeck.end() );
 
 	for (int i = 0; i < BOARD_SIZE; i++) {
 		if (i % (BOARD_SIZE / 4) == 0) {
 			m_tiles[i] = std::make_shared<Tile>(Tile::TileType::ANGOLARE,Position(i));
-			std::cout << "(A)";
+			//std::cout << "(A)";
 		}
 		else {
 			m_tiles[i] = std::make_shared<Tile>(shuffledeck.back(),Position(i));
-			std::cout << shuffledeck.back();
+			//std::cout << shuffledeck.back();
 			shuffledeck.pop_back();
 		}
 	}

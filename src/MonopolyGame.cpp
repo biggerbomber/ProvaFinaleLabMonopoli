@@ -59,7 +59,7 @@ void MonopolyGame::run()
     for (int i = 0; i < N_PLAYER; i++) {
       vet[i] = m_players[i];
     }
-    m_board.print(std::cout, vet);
+    //m_board.print(std::cout, vet);
     std::shared_ptr<Player>& p_attivo = m_players[m_num_turno[turno]];
     if (p_attivo->get_eliminato()) {
       turno++;

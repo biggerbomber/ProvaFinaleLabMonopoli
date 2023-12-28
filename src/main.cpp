@@ -7,9 +7,11 @@
 #include <iostream>
 
 int main(int argc , char** argv){
-    MonopolyGame m(MonopolyGame::PlayerType::BOT);
 
+  while (1) {
+    MonopolyGame m(MonopolyGame::PlayerType::BOT);
     m.run();
+  }
 
   /*
     for(int i=0;i<Board::BOARD_SIZE;i++){
