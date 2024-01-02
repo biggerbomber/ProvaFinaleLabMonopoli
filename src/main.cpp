@@ -8,11 +8,9 @@
 
 int main(int argc , char** argv){
 
-  while (1) { 
-    MonopolyGame m(MonopolyGame::PlayerType::BOT);
+    MonopolyGame m(MonopolyGame::PlayerType::HUMAN);
+    m.show();
     m.run();
-  }
-
   /*
     for(int i=0;i<Board::BOARD_SIZE;i++){
         std::cout<<Position(i)<<std::endl;

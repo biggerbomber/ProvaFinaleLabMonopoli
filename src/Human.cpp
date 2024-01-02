@@ -32,10 +32,11 @@ EventType Human::gestisci_casella(std::shared_ptr<Tile> t)
         }
         else {
             if (t->get_proprietario() == m_tag) {
-                std::cout << "Il terreno e' già in tuo possesso, vuoi migliorarlo?(Y/N)\n";
+                std::cout << "Il terreno e' gia' in tuo possesso, vuoi migliorarlo?(Y/N)\n";
                 std::cout << "Costruzione attuale: " << t->get_build_type() << " , Costo miglioramento: " << t->get_costo_miglioramento()<<'\n';
-                std::cin >> risposta;
+                
                 while (risposta != "N") {
+                    std::cin >> risposta;
                     if (risposta == "Y") {
                         if (t->get_costo_miglioramento() < m_budget) {
                             if (t->get_build_type() == Tile::BuildType::VUOTA) {
