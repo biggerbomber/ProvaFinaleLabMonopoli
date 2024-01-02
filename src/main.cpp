@@ -6,9 +6,9 @@
 #include "Bot.h"
 #include <iostream>
 
+
 int main(int argc , char** argv){
     MonopolyGame m(MonopolyGame::PlayerType::BOT);
-
 
     for(int i=0;i<Board::BOARD_SIZE;i++){
         std::cout<<Position(i)<<std::endl;
@@ -28,7 +28,7 @@ int main(int argc , char** argv){
 
     std::vector<std::shared_ptr<Player>> vec{ std::make_shared<Human>(p), std::make_shared<Bot>(b1), std::make_shared<Bot>(b2), nullptr};
     b.print(std::cout, vec);
-
+    
     t.set_tile_type(Tile::ECONOMICA);
     t.set_build_type(Tile::ALBERGO);
     //t.set_proprietario(3);
