@@ -4,7 +4,6 @@
 #include "Board.h"	 	
 #include "Player.h"
 #include "Position.h"
-#include "MonopolyGame.h"
 #include <algorithm>
 #include <iostream>
 #include <vector>
@@ -50,15 +49,13 @@ std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>
 
 	const int N_ELEM_RIGHE = (BOARD_SIZE / 4) + 1; // numero elementi riga in alto e in basso
 	const int N_ELEM_COLONNE = (BOARD_SIZE / 4) - 1; //tutti e 4 gli angoli sono compresi fra gli elementi delle righe
+
 	//STAMPA PRIMA RIGA
 	for (int i = N_ELEM_COLONNE + N_ELEM_RIGHE, p = 0; i < N_ELEM_COLONNE + 2 * N_ELEM_RIGHE; i++) {
 		os << " |" << *m_tiles[i];
 		while (p < arr.size()) {
 			if (arr[p] && (i == arr[p]->get_posizione().get_valore())) {
 				os << arr[p]->get_tag();
-			}
-			else {
-				os << " ";
 			}
 			p++;
 		}
@@ -71,49 +68,34 @@ std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>
 	for (int i = 0, c1 = N_ELEM_COLONNE + N_ELEM_RIGHE - 1, c2 = N_ELEM_RIGHE * 2 + N_ELEM_COLONNE, p = 0;
 		i < N_ELEM_COLONNE; i++) {
 
-		os << "\n |" << *m_tiles[c1];
+		os << " |" << *m_tiles[c1];
 		while (p < arr.size()) {
 			if (arr[p] && (c1 == arr[p]->get_posizione().get_valore())) {
 				os << arr[p]->get_tag();
 			}
-			else {
-				os << " ";
-			}
 			p++;
 		}
 		p = 0;
-		os << "| ";
-		os.width(N_ELEM_COLONNE * (MonopolyGame::N_PLAYER + 6) + 2); // 6: 2x '|' + terreno + struttura + 2x ' '; +2 per gli spazi iniziali e finali
+		os << "|                                ";
 		os << " |" << *m_tiles[c2];
 		while (p < arr.size()) {
 			if (arr[p] && (c2 == arr[p]->get_posizione().get_valore())) {
 				os << arr[p]->get_tag();
 			}
-			else {
-				os << " ";
-			}
 			p++;
 		}
 		p = 0;
-		os << "|\n\n";
+		os << "|\n";
 		c1--;
 		c2++;
 	}
 
 	//STAMPA ULTIMA RIGA
 	for (int i = N_ELEM_RIGHE - 1, p = 0; i >= 0; i--) {
-		if (i != 0) {
-			os << " |" << *m_tiles[i];
-		}
-		else {
-			os << " |P ";
-		}
+		os << " |" << *m_tiles[i];
 		while (p < arr.size()) {
 			if (arr[p] && (i == arr[p]->get_posizione().get_valore())) {
 				os << arr[p]->get_tag();
-			}
-			else {
-				os << " ";
 			}
 			p++;
 		}

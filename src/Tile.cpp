@@ -64,7 +64,7 @@ std::ostream& operator<<(std::ostream& os, const Tile::TileType& t_type) {
 
 std::ostream& operator<<(std::ostream& os, const Tile::BuildType& b_type) {
   if (b_type == Tile::BuildType::VUOTA) {
-    return os<<" ";
+    return os;
   }
   std::array<char, Tile::N_BUILD_TYPE> buildtype_charset = {'?','*','^'};
   return os << buildtype_charset[b_type];
