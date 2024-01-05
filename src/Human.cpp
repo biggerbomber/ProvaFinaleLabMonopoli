@@ -15,16 +15,17 @@ EventType Human::gestisci_casella(std::shared_ptr<Tile> t)
     if (t->get_tile_type()!=Tile::TileType::ANGOLARE) {
         if (!t->has_proprietario()) {
             if (t->get_costo_terreno() < m_budget) {
-                while (risposta!="N") {
+                while (risposta!="N" || risposta!="n") {
                     std::cout << "Vuoi acquistare il terreno?(Y/N)\n";
+                    std::cout << "Terreno: "<<t->get_tile_type()<<", Costo:"<<t->get_costo_terreno()<< "\n";
                     std::cin >> risposta;
-                    if (risposta == "Y") {
+                    if (risposta == "Y" || risposta == "y") {
                         return EventType::ACQUISTO_TERRENO;
                     }
                     else if (risposta == "show" || risposta == "SHOW") {
                             return EventType::SHOW_COMMAND;
                     }
-                    else if (risposta != "N") {
+                    else if (risposta != "N" || risposta != "n") {
                         std::cout << "Risposta non valida.\n";
                     }
                 }
@@ -33,11 +34,10 @@ EventType Human::gestisci_casella(std::shared_ptr<Tile> t)
         else {
             if (t->get_proprietario() == m_tag) {
                 std::cout << "Il terreno e' gia' in tuo possesso, vuoi migliorarlo?(Y/N)\n";
-                std::cout << "Costruzione attuale: " << t->get_build_type() << " , Costo miglioramento: " << t->get_costo_miglioramento()<<'\n';
-                
-                while (risposta != "N") {
+                std::cout << "Costruzione attuale: " << stampa_terreno(t->get_build_type()) << " , Costo miglioramento: " << t->get_costo_miglioramento() << '\n';
+                while (risposta != "N" || risposta != "n") {
                     std::cin >> risposta;
-                    if (risposta == "Y") {
+                    if (risposta == "Y" || risposta == "y") {
                         if (t->get_costo_miglioramento() < m_budget) {
                             if (t->get_build_type() == Tile::BuildType::VUOTA) {
                                 return EventType::COSTRUZIONE_CASA;
@@ -54,7 +54,7 @@ EventType Human::gestisci_casella(std::shared_ptr<Tile> t)
                     else if (risposta == "show" || risposta == "SHOW") {
                         return EventType::SHOW_COMMAND;
                     }
-                    else if(risposta!="N") {
+                    else if(risposta!="N" || risposta!="n") {
                         std::cout << "Risposta non valida.\n";
                     }
                 }
@@ -70,4 +70,19 @@ EventType Human::gestisci_casella(std::shared_ptr<Tile> t)
         }
     }
     return EventType::FINE_TURNO; // e' usato quando non devi fare nulla di particolare
+}
+
+static std::string stampa_terreno(Tile::BuildType b) {
+    switch (b) {
+        case Tile::BuildType::VUOTA:
+            return "VUOTA";
+        case Tile::BuildType::CASA:
+            return "VUOTA";
+        case Tile::BuildType::ALBERGO:
+            return "ALBERGO";
+        default:
+            return "Terreno non valido";
+    }
+
+    
 }
