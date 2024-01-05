@@ -143,13 +143,6 @@ bool Board::is_valid_position(Position p) const {
 //##################### OUTPUT OSTREAM #####################
 
 std::ostream& operator<<(std::ostream& os, const Board& b) {
-	//FUNZIONANTE
-	/*
-	for (int i = 0; i < Board::BOARD_SIZE; i++) {
-		os << " |" << *b.get_tile(Position(i));
-		if (b.get_tile(Position(i))->has_proprietario())os << "P| ";
-	}
-	*/
 	os << "\n\n\n\n";
 	for (int i = 14; i < 22; i++) {
 		os << " |" << *b.get_tile(Position(i));
