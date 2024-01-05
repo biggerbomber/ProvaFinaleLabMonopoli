@@ -35,7 +35,7 @@ MonopolyGame::MonopolyGame(MonopolyGame::PlayerType pt) {
     m_log.log(EventType::TIRO_DADI, dadi_inizio[i].p_tag, dadi_inizio[i].n_dice);
   }
   
-  gestisci_turni(dadi_inizio, 0, 4, &m_log);
+  gestisci_turni(dadi_inizio, 0, N_PLAYER, &m_log);
 
 
   std::cout << "Turni di Gioco:" << std::endl;
@@ -54,8 +54,8 @@ void MonopolyGame::run()
   int numturni = 0;
   while (num_eliminati + 1 != N_PLAYER)
   {
-    turno %= 4;
-    std::vector<std::shared_ptr<Player>>vet(4);
+    turno %= N_PLAYER;
+    std::vector<std::shared_ptr<Player>>vet(N_PLAYER);
     for (int i = 0; i < N_PLAYER; i++) {
       vet[i] = m_players[i];
     }

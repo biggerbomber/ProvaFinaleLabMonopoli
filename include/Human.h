@@ -11,4 +11,6 @@ public:
 	EventType gestisci_casella(std::shared_ptr<Tile>);
 };
 
+static std::string stampa_build(Tile::BuildType);
+
 #endif
