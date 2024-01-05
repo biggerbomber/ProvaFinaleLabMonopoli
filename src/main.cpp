@@ -1,10 +1,5 @@
+//@barbato alberto 2073961
 #include "MonopolyGame.h"
-#include "Board.h"
-#include "Position.h"
-#include "Tile.h"
-#include "Human.h"
-#include "Bot.h"
-#include <iostream>
 
 int main(int argc , char** argv){
   
@@ -26,8 +21,9 @@ int main(int argc , char** argv){
     return -1;
   }
 
-  MonopolyGame m(gameType);
-  m.run();
+   MonopolyGame m(gameType);
+   m.run();
 
+ 
   return 0;
 }

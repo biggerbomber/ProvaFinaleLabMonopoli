@@ -2,20 +2,21 @@
 
 #ifndef MONOPOLYGAME_H
 #define MONOPOLYGAME_H
+#include "Position.h"
 #include "Board.h"
 #include "Player.h"
 #include "Tile.h"
 #include "Logger.h"
+#include "EventType.h"
 #include <iostream>
 #include <memory>
 #include <fstream>
-#include "ExpandNamespace.h"
-#include <EventType.h>
+
 
 class MonopolyGame{
 public:
   const static int N_PLAYER=4;
-  const static int FIORINI_PASSAGGIO_VIA = 20;
+  const static int FIORINI_PASSAGGIO_VIA = 2;
   const static int MAX_TURNI=2000;
   enum PlayerType {BOT ,HUMAN};
   struct TurnoPlayer {
@@ -28,6 +29,10 @@ public:
   void show();
   void stampa_possedimenti();
   void stampa_fiorini();
+  void fine_partita_max_turni();
+  void fine_partita_vittoria();
+  EventType run_turno(int);
+  EventType gestisci_eventi(std::shared_ptr<Player>, std::shared_ptr<Tile>);
   std::shared_ptr<Player> get_player_from_tag(int);
 private:
   Board m_board;
@@ -37,7 +42,6 @@ private:
   PlayerType m_game_type;
 };
 
-std::ostream& operator<<(std::ostream&, const MonopolyGame&);
 
 
 int roll_dice();

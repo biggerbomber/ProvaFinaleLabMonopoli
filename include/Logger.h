@@ -1,4 +1,4 @@
-//logger.h Barbato Alberto
+//Barbato Alberto 2073961
 #include <fstream>
 #include "Position.h"
 #include "EventType.h"

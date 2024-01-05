@@ -33,7 +33,7 @@ public:
 
   void set_tile_type(TileType tt) { m_tile_type = tt; };
   void set_build_type(BuildType bt) { m_build_type = bt; };
-  void set_proprietario(std::shared_ptr<Player> prop);
+  void set_proprietario(int);
   void set_position(Position p) { m_pos = p; };
   void rimuovi_proprietario() { m_posseduta = false; };
 

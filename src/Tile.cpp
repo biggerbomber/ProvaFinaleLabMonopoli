@@ -42,12 +42,13 @@ int Tile::get_costo_miglioramento() const {
   return costo_miglioramneto[m_tile_type][m_build_type];
 }
 
-void Tile::set_proprietario(std::shared_ptr<Player> prop)
+void Tile::set_proprietario(int prop_tag)
 {
-  if (prop) {
+  if (prop_tag >= 0) {
     m_posseduta = true;
-    m_proprietario = prop->get_tag();
   }
+  m_proprietario = prop_tag;
+
 }
 
 std::ostream& operator<<(std::ostream& os, const Tile& tile) {

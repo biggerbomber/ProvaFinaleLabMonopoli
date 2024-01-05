@@ -28,7 +28,7 @@ void libera_possedimenti(std::vector<std::shared_ptr<Tile>>& v) {
 	for (int i = 0; i < v.size(); i++) {
 		v[i]->rimuovi_proprietario();
 		v[i]->set_build_type(Tile::BuildType::VUOTA);
-		v[i]->set_proprietario(nullptr); //non valido
+		v[i]->set_proprietario(-1); //non valido
 	}
 	v.resize(0);
 }
@@ -51,7 +51,7 @@ void migliora_terreno(EventType e,std::shared_ptr<Tile> t, std::shared_ptr<Playe
 void gestisci_acquisto_terreno(std::shared_ptr<Tile> t, std::shared_ptr<Player> p) {
 	p->paga(t->get_costo_terreno());
 	p->aggiungi_possedimento(t);
-	t->set_proprietario(p);
+	t->set_proprietario(p->get_tag());
 }
 
 void gestisci_pagamento_pernottamento(std::shared_ptr<Tile> t, std::shared_ptr<Player> p, std::shared_ptr<Player> p_prop) {
