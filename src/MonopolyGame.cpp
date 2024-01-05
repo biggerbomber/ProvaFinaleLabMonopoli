@@ -6,7 +6,7 @@
 #include "Human.h"
 #include <algorithm>
 #include <memory>
-#include <cstring>
+
 
 MonopolyGame::MonopolyGame(MonopolyGame::PlayerType pt) {
   srand((unsigned)time(0));
@@ -211,7 +211,7 @@ void MonopolyGame::fine_partita_max_turni() {
   }
 
   for (int i = 0; i < m_players.size(); i++) {
-    std::cout << posizioni[i] << "° Giocatore : "
+    std::cout << posizioni[i] << ") Giocatore : "
       << m_players[i]->get_tag()
       << " Con " << m_players[i]->get_budget()
       << " fiorini" << std::endl;
@@ -300,6 +300,11 @@ EventType MonopolyGame::gestisci_eventi(std::shared_ptr<Player> p_attivo, std::s
   case ELIMINAZIONE:
     gestisci_eliminazione(t_attiva, p_attivo,
       get_player_from_tag(t_attiva->get_proprietario()));
+    m_log.log(EventType::PAGAMENTO_PERNOTTAMENTO,
+      p_attivo->get_tag(),
+      p_attivo->get_posizione(),
+      t_attiva->get_proprietario(),
+      p_attivo->get_budget());
     break;
 
   default:

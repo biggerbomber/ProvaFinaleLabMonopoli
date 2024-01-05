@@ -1,6 +1,6 @@
 //@barbato alberto 2073961
 #include "MonopolyGame.h"
-
+#include <cstring>
 int main(int argc , char** argv){
   
   if (argc != 2) {
