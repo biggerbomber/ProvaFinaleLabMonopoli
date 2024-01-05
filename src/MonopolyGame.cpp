@@ -6,6 +6,7 @@
 #include "Human.h"
 #include <algorithm>
 #include <memory>
+#include <cstring>
 
 MonopolyGame::MonopolyGame(MonopolyGame::PlayerType pt) {
   srand((unsigned)time(0));
