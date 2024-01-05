@@ -48,9 +48,24 @@ Board::Board()
 
 std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>> arr) const {
 
-	const int N_ELEM_RIGHE = (BOARD_SIZE / 4) + 1; // numero elementi riga in alto e in basso
-	const int N_ELEM_COLONNE = (BOARD_SIZE / 4) - 1; //tutti e 4 gli angoli sono compresi fra gli elementi delle righe
+	constexpr int N_ELEM_RIGHE = (BOARD_SIZE / 4) + 1; // numero elementi riga in alto e in basso
+	constexpr int N_ELEM_COLONNE = (BOARD_SIZE / 4) - 1; //tutti e 4 gli angoli sono compresi fra gli elementi delle righe
+	constexpr int TILE_WIDTH = 4 + MonopolyGame::N_PLAYER + 2; //=> ' ' + '|' + "TipoTerreno" + "TipoStruttura" + no.players + '|' + ' '
+	constexpr int INDENTAZIONE = 4;
+
+	//STAMPA COORDINATE NUMERICHE
+	for (int i = 1; i <= N_ELEM_RIGHE; i++) {
+		for (int j = 1; j < TILE_WIDTH; j++) {
+			os << " ";
+		}
+		os << i;
+	}
+
 	//STAMPA PRIMA RIGA
+	os << "\n\nA";
+	for (int i = 0; i < INDENTAZIONE; i++) {
+		os << " ";
+	}
 	for (int i = N_ELEM_COLONNE + N_ELEM_RIGHE, p = 0; i < N_ELEM_COLONNE + 2 * N_ELEM_RIGHE; i++) {
 		os << " |" << *m_tiles[i];
 		while (p < arr.size()) {
@@ -65,13 +80,21 @@ std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>
 		p = 0;
 		os << "| ";
 	}
-	os << "\n";
-
+	
 	//STAMPA COLONNE
+	char caratt = 'B';
+	os << "\n\n";
 	for (int i = 0, c1 = N_ELEM_COLONNE + N_ELEM_RIGHE - 1, c2 = N_ELEM_RIGHE * 2 + N_ELEM_COLONNE, p = 0;
 		i < N_ELEM_COLONNE; i++) {
 
-		os << "\n |" << *m_tiles[c1];
+		//stampo gli spazi iniziali
+		os << "\n" << caratt;
+		for (int j = 0; j < INDENTAZIONE; j++) {
+			os << " ";
+		}
+
+		//stampa di tile
+		os << " |" << *m_tiles[c1];
 		while (p < arr.size()) {
 			if (arr[p] && (c1 == arr[p]->get_posizione().get_valore())) {
 				os << arr[p]->get_tag();
@@ -83,7 +106,11 @@ std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>
 		}
 		p = 0;
 		os << "| ";
-		os.width(N_ELEM_COLONNE * (MonopolyGame::N_PLAYER + 6) + 2); // 6: 2x '|' + terreno + struttura + 2x ' '; +2 per gli spazi iniziali e finali
+		//spazio fra le due colonne
+		for (int i = 0; i < N_ELEM_COLONNE * TILE_WIDTH; i++) {
+			os << " ";
+		}
+		//stampa della seconda tile
 		os << " |" << *m_tiles[c2];
 		while (p < arr.size()) {
 			if (arr[p] && (c2 == arr[p]->get_posizione().get_valore())) {
@@ -98,9 +125,14 @@ std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>
 		os << "|\n\n";
 		c1--;
 		c2++;
+		caratt++;
 	}
 
 	//STAMPA ULTIMA RIGA
+	os << "\n" << caratt;
+	for (int i = 0; i < INDENTAZIONE; i++) {
+		os << " ";
+	}
 	for (int i = N_ELEM_RIGHE - 1, p = 0; i >= 0; i--) {
 		if (i != 0) {
 			os << " |" << *m_tiles[i];
