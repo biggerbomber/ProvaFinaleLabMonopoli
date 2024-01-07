@@ -8,15 +8,15 @@
 #include <memory>
 
 
-MonopolyGame::MonopolyGame(MonopolyGame::PlayerType pt) {
+MonopolyGame::MonopolyGame(MonopolyGame::GameType pt) {
   srand((unsigned)time(0));
   m_game_type = pt;
   switch (pt)
   {
-  case MonopolyGame::PlayerType::BOT:
+  case MonopolyGame::GameType::BOT:
     m_players[0] = std::make_shared<Bot>(0, m_board.get_partenza());
     break;
-  case MonopolyGame::PlayerType::HUMAN:
+  case MonopolyGame::GameType::HUMAN:
     m_players[0] = std::make_shared<Human>(0, m_board.get_partenza());
     break;
   default:

@@ -7,14 +7,14 @@ int main(int argc , char** argv){
     std::cout << "Numero di paramentri da console errato , Attesi 1 Trovati : " << argc - 1 << std::endl;
     return -1;
   }
-  MonopolyGame::PlayerType gameType;
+  MonopolyGame::GameType gameType;
   if (strcmp(argv[1],"human")==0) 
   {
-    gameType = MonopolyGame::PlayerType::HUMAN;
+    gameType = MonopolyGame::GameType::HUMAN;
   }
   else if(strcmp(argv[1], "computer") == 0)
   {
-    gameType = MonopolyGame::PlayerType::BOT;
+    gameType = MonopolyGame::GameType::BOT;
   }
   else {
     std::cout << "\"human\" or \"computer\" aspettato, Trovato : " << argv[1] << std::endl;
