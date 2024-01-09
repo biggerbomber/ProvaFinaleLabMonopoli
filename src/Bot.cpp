@@ -2,6 +2,12 @@
 
 #include "Bot.h"
 
+/*
+Gestisci casella prende una decisione (quando possibile) su che azione fare su una casella.
+Restituisce quindi un EventType dell'evento che deve avvenire all'interno del gioco,
+si occuperà poi MonopolyGame facendo uso delle funzioni helper di farle avvenire.
+*/
+
 Bot::Bot(int tag, Position p) {// problema qui " impossibile fare riferimento al costruttore predefinito player, e' una funzione eliminata"
     m_tag = tag;
     m_posizione = p;
@@ -42,5 +48,5 @@ EventType Bot::gestisci_casella(std::shared_ptr<Tile> t) {
             }
         }
     }
-    return EventType::FINE_TURNO;
+    return EventType::FINE_TURNO; // E' usato quando non devi fare nulla di particolare (ad esempio quando si capita su una casella angolare)
 }

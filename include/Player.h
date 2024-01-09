@@ -9,6 +9,22 @@
 #include <vector>
 #include <memory>
 
+/*
+Classe astratta per la gestione dei giocatori :
+Viene specializzata in Bot e Human.
+All'interno di player vengono definite una serie di
+funzioni utili alla modifica delle variabili membro:
+-funzioni di get.
+-funzioni di set per posizione, eliminato e possedimento (aggiungi_possedimento).
+-funzioni di set per modificare budget (paga/riscuoti)
+che sono separate perché rappresentano due operazioni diverse.
+
+La funzione virtuale pura e' gestisci casella, viene chiamata sul giocatore e
+gli fa prendere una decisione in base alla casella su cui si trova.
+In questo modo gestisci casella può essere chiamato su un vettore di Player* 
+contenente Human e Bot e il compilatore chiamerà la funzione corretta tramite
+Virtual Table.
+*/
 
 class Player{
     public:
@@ -54,7 +70,11 @@ class Player{
 
 };
 
-//H-F
+/*
+Funzioni helper definite su player e usate su MonopolyGame.
+Gestiscono le azioni che deve fare il gioco per eseguire l'azione del player:
+(Se il player vuole migliorare il terreno--> migliora_terreno...)
+*/
 void libera_possedimenti(std::vector<std::shared_ptr<Tile>>&);
 void migliora_terreno(EventType, std::shared_ptr<Tile>, std::shared_ptr<Player>);
 void gestisci_acquisto_terreno(std::shared_ptr<Tile>, std::shared_ptr<Player>);

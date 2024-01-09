@@ -5,6 +5,10 @@
 
 #include "Player.h"
 
+/*
+Classe che deriva Player, ha un costruttore e sovrascrive gestisci_casella.
+*/
+
 class Bot: public Player {
 public:
 	Bot(int, Position);

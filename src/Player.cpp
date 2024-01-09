@@ -18,7 +18,7 @@ void Player::riscuoti(int somma) { // NO-THROW-GUARANTEE se si prova a riscuoter
 	m_budget += somma;
 }
 
-void Player::aggiungi_possedimento(std::shared_ptr<Tile> p) {//non fa controlli
+void Player::aggiungi_possedimento(std::shared_ptr<Tile> p) {//non fa controlli, questi vengono fatti nell'algoritmo di gestisci casella quando si decide di comprare il terreno
 		m_possedimenti.push_back(p);
 }
 
@@ -33,7 +33,7 @@ void libera_possedimenti(std::vector<std::shared_ptr<Tile>>& v) {
 	v.resize(0);
 }
 
-void migliora_terreno(EventType e,std::shared_ptr<Tile> t, std::shared_ptr<Player>p ) {
+void migliora_terreno(EventType e,std::shared_ptr<Tile> t, std::shared_ptr<Player>p ) { // si noti che paga fa gia' il controllo al suo interno sul budget
 	switch (e) {
 	case EventType::COSTRUZIONE_CASA:
 		p->paga(t->get_costo_miglioramento());

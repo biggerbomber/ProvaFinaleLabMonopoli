@@ -2,7 +2,10 @@
 
 #ifndef EVENT_TYPE_H
 #define EVENT_TYPE_H
-//Descrive Possibili eventi nella partita
+/*
+Enum che descrive gli eventi della partita, si attribuiscono
+delle etichette ai possibili avvenimenti nel gioco.
+*/
 enum EventType {
     PASSAGGIO_VIA, TIRO_DADI, ARRIVO, ACQUISTO_TERRENO,
     COSTRUZIONE_CASA, COSTRUZIONE_ALBERGO,

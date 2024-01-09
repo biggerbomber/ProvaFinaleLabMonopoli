@@ -5,6 +5,9 @@
 
 #include "Player.h"
 
+/*
+Classe che deriva Player, ha un costruttore e sovrascrive gestisci_casella.
+*/
 class Human : public Player {
 public:
 	Human(int, Position);
