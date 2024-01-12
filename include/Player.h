@@ -21,52 +21,52 @@ che sono separate perché rappresentano due operazioni diverse.
 
 La funzione virtuale pura e' gestisci casella, viene chiamata sul giocatore e
 gli fa prendere una decisione in base alla casella su cui si trova.
-In questo modo gestisci casella può essere chiamato su un vettore di Player* 
+In questo modo gestisci casella può essere chiamato su un vettore di Player*
 contenente Human e Bot e il compilatore chiamerà la funzione corretta tramite
 Virtual Table.
 */
 
-class Player{
-    public:
-        
-        // funzioni in-line
-        const static int BUDGET_PARTENZA = 100;
-        std::vector<std::shared_ptr<Tile>>& get_possedimenti(){return m_possedimenti;}
-        
-        Position& get_posizione(){return m_posizione;}
-        
-        int get_budget(){return m_budget;}
+class Player {
+public:
 
-        bool get_eliminato() { return m_eliminato; }
+  // funzioni in-line
+  const static int BUDGET_PARTENZA = 100;
+  std::vector<std::shared_ptr<Tile>>& get_possedimenti() { return m_possedimenti; }
 
-        int get_tag() { return m_tag; }
+  Position& get_posizione() { return m_posizione; }
 
-        void set_posizione(Position p) { m_posizione = p; }
+  int get_budget() { return m_budget; }
 
-        void set_eliminato(bool b) { m_eliminato = b; }
+  bool get_eliminato() { return m_eliminato; }
 
-        //funzioni implementate sul file cpp
-        
-        bool paga(int);
+  int get_tag() { return m_tag; }
 
-        void riscuoti(int); 
+  void set_posizione(Position p) { m_posizione = p; }
 
-        void aggiungi_possedimento(std::shared_ptr<Tile>);
+  void set_eliminato(bool b) { m_eliminato = b; }
 
-        virtual EventType gestisci_casella(std::shared_ptr<Tile>) =0;
+  //funzioni implementate sul file cpp
+
+  bool paga(int);
+
+  void riscuoti(int);
+
+  void aggiungi_possedimento(std::shared_ptr<Tile>);
+
+  virtual EventType gestisci_casella(std::shared_ptr<Tile>) = 0;
 
 
-    protected:
-        
-        int m_tag{ -1 };
-        
-        std::vector<std::shared_ptr<Tile>> m_possedimenti;
+protected:
 
-        Position m_posizione{ 0 };
-        
-        int m_budget{ 0 };
-        
-        bool m_eliminato{ false };
+  int m_tag{ -1 };
+
+  std::vector<std::shared_ptr<Tile>> m_possedimenti;
+
+  Position m_posizione{ 0 };
+
+  int m_budget{ 0 };
+
+  bool m_eliminato{ false };
 
 };
 
