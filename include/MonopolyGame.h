@@ -73,6 +73,23 @@ private:
 int roll_dice();
 
 //gestisce la decisione dei turni di gioco,Ricorsivamente
+//Il suo funzionamento è uguale ad una partita reale di monopoly:
+// Tutti tirano il dado, si ordina i giocatori in base al tiro piu alto.
+// In caso di pareggi i giocatori interessati ritiano il dado, ma mantengono la loro posizione relativa agli altri giocatori:
+// Esempio:
+// A fa 10,
+// B fa 7,
+// C fa 7,
+// D fa 3;
+// B e C ritiano, ma indipendentemente dal loro secondo tiro, A andrà prima di entrabi e D andrà per ultimo.
+// B fa 12
+// C fa 2 
+// 
+// Turni finali:
+// 1 A con 10
+// 2 B con 7 -> 12
+// 3 C con 7 -> 2
+// 4 D con 3
 //Parametri : Un vettore di "TurnoPlayer" da controllare, ordinare e modificare se necessario
 //            [index_start,index_end[ intervallo di azione
 //            Logger* necessario per la stampa dei tiri di dado 

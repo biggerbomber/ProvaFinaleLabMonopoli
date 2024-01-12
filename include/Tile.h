@@ -3,7 +3,6 @@
 
 #ifndef TILE_H
 #define TILE_H
-#include "ExpandNamespace.h"
 #include "Position.h"
 #include <array>
 #include <iostream>
@@ -15,11 +14,6 @@ public:
   enum TileType { ANGOLARE, ECONOMICA, STANDARD, LUSSO};
   static const int N_BUILD_TYPE=3;
   enum BuildType { VUOTA, CASA, ALBERGO };
-
- /* static const std::array<int, N_TILE_TYPE> s_costo_tereno;
-  static const std::array<std::array<int,N_TILE_TYPE>,N_BUILD_TYPE> s_costo_miglioramento;
-  static const std::array<std::array<int,N_TILE_TYPE>,N_BUILD_TYPE> s_costo_pernottamento;
-  */
 
   Tile(TileType,Position);
 

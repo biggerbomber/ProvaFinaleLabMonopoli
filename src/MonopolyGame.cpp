@@ -137,10 +137,12 @@ int roll_dice()
 
 void gestisci_turni(std::array<MonopolyGame::TurnoPlayer, MonopolyGame::N_PLAYER>& arr, int index_start, int index_end,Logger* l)
 {
+  //se il subarray e di dim=1 non devo fare nulla;
   if (index_start + 1 == index_end)
   {
     return;
   }
+  //funzione per ordinare giocatori per tiro di dado
   auto compare = [](const MonopolyGame::TurnoPlayer& lhs,
                   const MonopolyGame::TurnoPlayer& rhs) -> bool
     {
@@ -149,17 +151,19 @@ void gestisci_turni(std::array<MonopolyGame::TurnoPlayer, MonopolyGame::N_PLAYER
 
   std::sort(arr.begin() + index_start, arr.begin() + index_end, compare);
   int range_equal_start = index_start;
-
+  //per ogni "range di tiro" uguali, ritira i dadi e chiama ricorivamnete questa funzione
   for (int i = index_start+1; i <= index_end; i++)
   {
 
     if (i==index_end || (arr[i].n_dice != arr[range_equal_start].n_dice))
     {
+      //evito di chiamare la ricorsione se mi acorgo che dim(range) =1;
       if (range_equal_start + 1 == i)
       {
         range_equal_start = i;
         continue;
       }
+
       for (int j = range_equal_start; j < i; j++)
       {
         arr[j].n_dice = roll_dice();
@@ -176,6 +180,7 @@ void gestisci_turni(std::array<MonopolyGame::TurnoPlayer, MonopolyGame::N_PLAYER
 }
  
 void MonopolyGame::fine_partita_max_turni() {
+
   auto compare = [](const std::shared_ptr<Player>& lhs,
     const std::shared_ptr<Player>& rhs) {
       return lhs->get_budget() > rhs->get_budget();

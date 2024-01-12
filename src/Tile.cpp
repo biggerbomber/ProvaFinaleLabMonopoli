@@ -1,13 +1,14 @@
-#include "Tile.h"
 //@Barbato Alberto 2073961
+
 #include "Tile.h"
-#include "MonopolyGame.h"
+
 
 Tile::Tile(Tile::TileType tt, Position pos) 
       :m_tile_type{ tt }, m_pos{ pos }
 {
   m_build_type = Tile::BuildType::VUOTA;
   m_posseduta = false;
+  m_proprietario = false;
 }
 
 int Tile::get_proprietario() const{
@@ -22,7 +23,7 @@ int Tile::get_costo_terreno() const {
 }
 int Tile::get_costo_pernottamento() const {
   static std::array<std::array<int, Tile::N_BUILD_TYPE>, Tile::N_TILE_TYPE> costo_pernottamento
-  { { //vuota,casa,albergo
+  { { //{vuota,casa,albergo}
       {0,0,0}, // terreno angolare
       {0,2,4}, // economico
       {0,4,8}, //standard
@@ -33,7 +34,7 @@ int Tile::get_costo_pernottamento() const {
 
 int Tile::get_costo_miglioramento() const {
   static std::array<std::array<int, Tile::N_BUILD_TYPE>, Tile::N_TILE_TYPE> costo_miglioramneto
-  { { //vuota,casa,albergo
+  { { //{vuota,casa,albergo}
       {0,0,0}, // terreno angolare
       {3,3,0}, // economico
       {5,5,0}, //standard
