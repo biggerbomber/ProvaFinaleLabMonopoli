@@ -1,4 +1,4 @@
-//@Barbato alberto 2073961
+//@Pinton Mattia 2066703
 
 #ifndef BOARD_H
 #define BOARD_H

@@ -46,6 +46,7 @@ Board::Board()
 }
 //##################### FUNZIONI #####################
 
+
 std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>> arr) const {
 
 	constexpr int N_ELEM_RIGHE = (BOARD_SIZE / 4) + 1; // numero elementi riga in alto e in basso
@@ -54,7 +55,14 @@ std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>
 	constexpr int INDENTAZIONE = 4; //quanti spazi fra le coordinate numeriche e la prima colonna del tabellone
 
 	//STAMPA COORDINATE NUMERICHE
-	for (int i = 1; i <= N_ELEM_RIGHE; i++) {
+	//il primo numero dipende dall'indetazione
+	for (int i = 0; i < INDENTAZIONE + (TILE_WIDTH / 2); i++) {
+		os << " ";
+	}
+	//dopo i primi spazi stampo il primo numero
+	os << "1";
+	//da qui in poi i numeri saranno sempre circa a meta' tile
+	for (int i = 2; i <= N_ELEM_RIGHE; i++) {
 		for (int j = 1; j < TILE_WIDTH; j++) {
 			os << " ";
 		}
@@ -88,7 +96,7 @@ std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>
 		p = 0;
 		os << "| ";
 	}
-	
+
 	//-------------------- STAMPA COLONNE --------------------
 	char caratt = 'B';
 	os << "\n\n";
