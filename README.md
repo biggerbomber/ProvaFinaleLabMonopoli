@@ -31,10 +31,10 @@ Abbiamo creato la classe astratta Player.h perché avevamo bisogno di gestire va
 Abbiamo riscontrato che l'unica differenza tra un player umano e un bot è la modalità di gestione della cella di arrivo: perciò abbiamo astratto tutto il resto in comune e evitato di duplicare codice inutilmente.
 
 ## Requsisti
--1.  Un computer
-0.   Una connessione internet
-0,5. Compilatore C++ 
-1.   Cmake
+-1)  Un computer
+0)   Una connessione internet
+0,5) Compilatore C++ 
+1)   Cmake
 
 
 ## Licenza
