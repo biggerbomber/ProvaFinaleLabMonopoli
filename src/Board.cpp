@@ -12,33 +12,33 @@
 //##################### COSTRUTTORE #####################
 Board::Board()
 {
+	//creo un array seecondario dove metto tutte le tile tranne gli angoli che verranno aggiunto dopo
 	std::vector<Tile::TileType> shuffledeck;
-	//std::cout <<"PUSH ARRAY AUX" << "\n";
 	for (int i = 0; i < (BOARD_SIZE-SIDE_TILES); i++) {
 		if (i < ECO_TILES) {
+			//nelle posizioni da 0 a (#ecotiles - 1) metto tiles di tipo ECO
 			shuffledeck.push_back(Tile::TileType::ECONOMICA);
-			//std::cout << "E ";
 		}
 		else if (i < STD_TILES+ECO_TILES ) {
+			//nelle posizioni da #ecotiles a (#ecotiles+  #stdtiles - 1) metto tiles di tipo STD
 			shuffledeck.push_back(Tile::TileType::STANDARD);
-			//std::cout << "S ";
 		}
 		else{
+			//nelle posizioni rimanenti metto tiles di tipo LUSSO
 			shuffledeck.push_back(Tile::TileType::LUSSO);
-			//std::cout << "L ";
 		}
 	}
-	//std::cout << "\n\n SHUFFLE \n";
+	//ora faccio lo shuffle dell'array secondario
 	std::random_shuffle(shuffledeck.begin(), shuffledeck.end() );
 
+	//posiziono la tile casuale nell'array finale facendo il pop nell'array ausiliario
 	for (int i = 0; i < BOARD_SIZE; i++) {
+		//se la posizione corrente è divisibile per 4, allora sono in un angolo della tabella 
 		if (i % (BOARD_SIZE / 4) == 0) {
 			m_tiles[i] = std::make_shared<Tile>(Tile::TileType::ANGOLARE,Position(i));
-			//std::cout << "(A)";
 		}
 		else {
 			m_tiles[i] = std::make_shared<Tile>(shuffledeck.back(),Position(i));
-			//std::cout << shuffledeck.back();
 			shuffledeck.pop_back();
 		}
 	}
@@ -51,7 +51,7 @@ std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>
 	constexpr int N_ELEM_RIGHE = (BOARD_SIZE / 4) + 1; // numero elementi riga in alto e in basso
 	constexpr int N_ELEM_COLONNE = (BOARD_SIZE / 4) - 1; //tutti e 4 gli angoli sono compresi fra gli elementi delle righe
 	constexpr int TILE_WIDTH = 4 + MonopolyGame::N_PLAYER + 2; //=> ' ' + '|' + "TipoTerreno" + "TipoStruttura" + no.players + '|' + ' '
-	constexpr int INDENTAZIONE = 4;
+	constexpr int INDENTAZIONE = 4; //quanti spazi fra le coordinate numeriche e la prima colonna del tabellone
 
 	//STAMPA COORDINATE NUMERICHE
 	for (int i = 1; i <= N_ELEM_RIGHE; i++) {
@@ -61,30 +61,40 @@ std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>
 		os << i;
 	}
 
-	//STAMPA PRIMA RIGA
+	//-------------------- STAMPA PRIMA RIGA --------------------
 	os << "\n\nA";
 	for (int i = 0; i < INDENTAZIONE; i++) {
 		os << " ";
 	}
+	//devo stampare gli elementi della terza segmentazione 
+	//segmentazioni dell' array di Board:
+	//( base inferiore tabellone -> colonna sinistra -> [base superiore] -> colonna detra )
 	for (int i = N_ELEM_COLONNE + N_ELEM_RIGHE, p = 0; i < N_ELEM_COLONNE + 2 * N_ELEM_RIGHE; i++) {
 		os << " |" << *m_tiles[i];
+		//gestione per la visulizzazione dei player presenti sulla tabella attuale
 		while (p < arr.size()) {
 			if (arr[p] && (i == arr[p]->get_posizione().get_valore())) {
+				//se la tile che sto ispezionando contiene il player della cella [p] dell'array dei player
+				//passata alla funzione, stapo il tag del player
 				os << arr[p]->get_tag();
 			}
 			else {
+				//ho deciso di tenere costante la lunghezza dei tile, quindi devo rimpiazzare il tag
+				// del giocatore che non e' presente con uno spazio
 				os << " ";
 			}
-			p++;
+			p++; //avanzo nell'ispezione dell'array dei player
 		}
 		p = 0;
 		os << "| ";
 	}
 	
-	//STAMPA COLONNE
+	//-------------------- STAMPA COLONNE --------------------
 	char caratt = 'B';
 	os << "\n\n";
-	for (int i = 0, c1 = N_ELEM_COLONNE + N_ELEM_RIGHE - 1, c2 = N_ELEM_RIGHE * 2 + N_ELEM_COLONNE, p = 0;
+	//devo stampare contemporaneamente gli elementi delle due colonne 
+	//(base inferiore tabellone -> [colonna sinistra] -> base superiore -> [colonna detra])
+	for (int i = 0, c1 = N_ELEM_COLONNE + N_ELEM_RIGHE - 1, c2 = N_ELEM_RIGHE * 2 + N_ELEM_COLONNE, p = 0; // c1 : colonna sx, c2: colonna dx
 		i < N_ELEM_COLONNE; i++) {
 
 		//stampo gli spazi iniziali
@@ -128,7 +138,9 @@ std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>
 		caratt++;
 	}
 
-	//STAMPA ULTIMA RIGA
+	//-------------------- STAMPA ULTIMA RIGA --------------------
+	//devo stampare contemporaneamente gli elementi della base inferiore 
+	//( [base inferiore tabellone] -> colonna sinistra -> base superiore -> colonna detra )
 	os << "\n" << caratt;
 	for (int i = 0; i < INDENTAZIONE; i++) {
 		os << " ";
@@ -157,7 +169,8 @@ std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>
 
 bool Board::avanza_e_controlla(Position& p, int n) const {//retsituisce true se si passa dal via
 	int old_pos = p.get_valore();
-	p.set_valore((old_pos + n) % BOARD_SIZE);
+	p.set_valore((old_pos + n) % BOARD_SIZE); // se supero board size, prende solo il resto ( riparte da 0 )
+	//se la vecchia posizione e' maggiore della nuova, necessariamente sono passato dal via
 	if (p.get_valore() < old_pos) {
 		return true;
 	}
@@ -173,7 +186,6 @@ bool Board::is_valid_position(Position p) const {
 
 
 //##################### OUTPUT OSTREAM #####################
-
 std::ostream& operator<<(std::ostream& os, const Board& b) {
 	os << "\n\n\n\n";
 	for (int i = 14; i < 22; i++) {
