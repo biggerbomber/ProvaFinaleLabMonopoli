@@ -1,18 +1,18 @@
 //@barbato alberto 2073961
 #include "MonopolyGame.h"
 #include <cstring>
-int main(int argc , char** argv){
-  
+int main(int argc, char** argv) {
+
   if (argc != 2) {
     std::cout << "Numero di paramentri da console errato , Attesi 1 Trovati : " << argc - 1 << std::endl;
     return -1;
   }
   MonopolyGame::GameType gameType;
-  if (strcmp(argv[1],"human")==0) 
+  if (strcmp(argv[1], "human") == 0)
   {
     gameType = MonopolyGame::GameType::HUMAN;
   }
-  else if(strcmp(argv[1], "computer") == 0)
+  else if (strcmp(argv[1], "computer") == 0)
   {
     gameType = MonopolyGame::GameType::BOT;
   }
@@ -21,9 +21,9 @@ int main(int argc , char** argv){
     return -1;
   }
 
-   MonopolyGame m(gameType);
-   m.run();
+  MonopolyGame m(gameType);
+  m.run();
 
- 
+
   return 0;
 }

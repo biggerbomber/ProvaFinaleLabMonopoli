@@ -9,10 +9,10 @@
 Classe che deriva Player, ha un costruttore e sovrascrive gestisci_casella.
 */
 
-class Bot: public Player {
+class Bot : public Player {
 public:
-	Bot(int, Position);
-	EventType gestisci_casella(std::shared_ptr<Tile>);
+  Bot(int, Position);
+  EventType gestisci_casella(std::shared_ptr<Tile>);
 };
 
 #endif

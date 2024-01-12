@@ -4,13 +4,13 @@
 
 //logger.cpp
 
-Logger::Logger(){
+Logger::Logger() {
   std::cout << "Inizializzazione Logger...\n";
   m_output_file = std::ofstream("../data/Gazzettino.txt");
   std::cout << "Successo\n";
 }
 
-void Logger::log(EventType lt, int tag1,Position pos1, int tag2, int fiorini){
+void Logger::log(EventType lt, int tag1, Position pos1, int tag2, int fiorini) {
 
   switch (lt)
   {
@@ -19,7 +19,7 @@ void Logger::log(EventType lt, int tag1,Position pos1, int tag2, int fiorini){
     m_output_file << "- Giocatore " << tag1 << " e' passato dal via e ha ritirato 20 fiorini" << std::endl;
     break;
   case EventType::TIRO_DADI:
-    std::cout << "- Giocatore " << tag1 << " ha tirato i dati e ha ottenuto un valore di " << pos1.get_valore()<<std::endl;
+    std::cout << "- Giocatore " << tag1 << " ha tirato i dati e ha ottenuto un valore di " << pos1.get_valore() << std::endl;
     m_output_file << "- Giocatore " << tag1 << " ha tirato i dati e ha ottenuto un valore di " << pos1.get_valore() << std::endl;
     break;
   case EventType::ARRIVO:
@@ -27,7 +27,7 @@ void Logger::log(EventType lt, int tag1,Position pos1, int tag2, int fiorini){
     m_output_file << "- Giocatore " << tag1 << " e' arrivato alla casella " << pos1 << std::endl;
     break;
   case EventType::ACQUISTO_TERRENO:
-    std::cout << "- Giocatore " << tag1 << " ha acquistato il terreno " << pos1 << std::endl; 
+    std::cout << "- Giocatore " << tag1 << " ha acquistato il terreno " << pos1 << std::endl;
     m_output_file << "- Giocatore " << tag1 << " ha acquistato il terreno " << pos1 << std::endl;
     break;
   case EventType::COSTRUZIONE_CASA:

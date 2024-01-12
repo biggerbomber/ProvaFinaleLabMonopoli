@@ -13,14 +13,14 @@
 #include <fstream>
 
 //Questa classe organizza tutti gli elementi della partita e attua il suo svolgimento 
-class MonopolyGame{
+class MonopolyGame {
 public:
 
-  const static int N_PLAYER=4;
+  const static int N_PLAYER = 4;
   const static int FIORINI_PASSAGGIO_VIA = 20;
-  const static int MAX_TURNI=2000;
+  const static int MAX_TURNI = 2000;
   //usato come parametro per inizializzare MonopolyGame
-  enum GameType {BOT ,HUMAN};
+  enum GameType { BOT, HUMAN };
   //utilizzata nella generazione dei turni
   struct TurnoPlayer {
     int p_tag;
@@ -58,11 +58,11 @@ private:
   // Valore Restituito: L'evento scelta del Player
   EventType gestisci_eventi(std::shared_ptr<Player>, std::shared_ptr<Tile>);
 
- 
+
   std::shared_ptr<Player> get_player_from_tag(int);
 
   Board m_board;
-  std::array<std::shared_ptr<Player>,N_PLAYER> m_players;
+  std::array<std::shared_ptr<Player>, N_PLAYER> m_players;
   std::array<int, N_PLAYER> m_num_turno;
   Logger m_log;
   GameType m_game_type;
@@ -93,6 +93,6 @@ int roll_dice();
 //Parametri : Un vettore di "TurnoPlayer" da controllare, ordinare e modificare se necessario
 //            [index_start,index_end[ intervallo di azione
 //            Logger* necessario per la stampa dei tiri di dado 
-void gestisci_turni(std::array<MonopolyGame::TurnoPlayer, MonopolyGame::N_PLAYER>&, int index_start, int index_end,Logger*);
+void gestisci_turni(std::array<MonopolyGame::TurnoPlayer, MonopolyGame::N_PLAYER>&, int index_start, int index_end, Logger*);
 
 #endif
