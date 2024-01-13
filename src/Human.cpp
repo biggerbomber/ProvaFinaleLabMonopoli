@@ -1,6 +1,8 @@
 //@Casucci Leonardo 2073980
 
 #include "Human.h"
+#include <iostream>
+#include <string>
 #include <algorithm>
 
 /*
@@ -26,7 +28,7 @@ EventType Human::gestisci_casella(std::shared_ptr<Tile> t)
           std::cout << "Vuoi acquistare il terreno?(Y/N/show)" << std::endl;
           std::cout << "Terreno: " << t->get_tile_type() << ", Costo:" << t->get_costo_terreno() << std::endl;
           std::cout << "A posizione: " << t->get_position() << std::endl;
-          std::cin >> risposta;
+          std::getline(std::cin, risposta);
           std::transform(risposta.begin(), risposta.end(), risposta.begin(),
             [](unsigned char c) { return std::tolower(c); }); //trasforma la stringa in lowercase, in questo modo la risposta non e' case sensitive
           if (risposta == "y") {
@@ -47,7 +49,7 @@ EventType Human::gestisci_casella(std::shared_ptr<Tile> t)
         std::cout << "Costruzione attuale: " << stampa_build(t->get_build_type()) << " , Costo miglioramento: " << t->get_costo_miglioramento() << std::endl;
         std::cout << "A posizione: " << t->get_position() << std::endl;
         while (risposta != "n") {
-          std::cin >> risposta;
+          std::getline(std::cin, risposta);
           std::transform(risposta.begin(), risposta.end(), risposta.begin(),
             [](unsigned char c) { return std::tolower(c); }); // si ripete l'algoritmo usato precedentemente
           if (risposta == "y") {
