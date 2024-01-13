@@ -21,6 +21,7 @@ Abbiamo deciso di dividere il codice in 3 libreria statiche concettualmente sepa
 1. MonoplyGameLib //Barbato Alberto
 2. BoardLib //Pinton Mattia
 3. PlayerLib //Casucci Leonardo
+
 Questo ha permesso, dopo esserci accordati sulle varie interfacce della classi, di lavorare indipendentemente l'uno dall altro, velocizzando drasticamente lo sviluppo del codice.
 
 ### Problemi con Dipendenze Circolari
