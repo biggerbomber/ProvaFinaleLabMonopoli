@@ -8,7 +8,7 @@ Restituisce quindi un EventType dell'evento che deve avvenire all'interno del gi
 si occuperà poi MonopolyGame facendo uso delle funzioni helper di farle avvenire.
 */
 
-Bot::Bot(int tag, Position p) {// problema qui " impossibile fare riferimento al costruttore predefinito player, e' una funzione eliminata"
+Bot::Bot(int tag, Position p) {
   m_tag = tag;
   m_posizione = p;
   m_budget = BUDGET_PARTENZA; //budget di partenza

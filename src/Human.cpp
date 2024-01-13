@@ -23,7 +23,7 @@ EventType Human::gestisci_casella(std::shared_ptr<Tile> t)
     if (!t->has_proprietario()) {
       if (t->get_costo_terreno() < m_budget) {
         while (risposta != "n") {
-          std::cout << "Vuoi acquistare il terreno?(Y/N)" << std::endl;
+          std::cout << "Vuoi acquistare il terreno?(Y/N/show)" << std::endl;
           std::cout << "Terreno: " << t->get_tile_type() << ", Costo:" << t->get_costo_terreno() << std::endl;
           std::cout << "A posizione: " << t->get_position() << std::endl;
           std::cin >> risposta;
@@ -43,7 +43,7 @@ EventType Human::gestisci_casella(std::shared_ptr<Tile> t)
     }
     else {
       if (t->get_proprietario() == m_tag && t->get_build_type() != Tile::BuildType::ALBERGO) {
-        std::cout << "Il terreno e' gia' in tuo possesso, vuoi migliorarlo?(Y/N)" << std::endl;
+        std::cout << "Il terreno e' gia' in tuo possesso, vuoi migliorarlo?(Y/N/show)" << std::endl;
         std::cout << "Costruzione attuale: " << stampa_build(t->get_build_type()) << " , Costo miglioramento: " << t->get_costo_miglioramento() << std::endl;
         std::cout << "A posizione: " << t->get_position() << std::endl;
         while (risposta != "n") {
