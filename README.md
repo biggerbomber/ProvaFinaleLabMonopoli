@@ -10,7 +10,8 @@ Benvenuti nel progetto finale dedicato alla riproduzione del gioco da tavolo Mon
 3. in "build" eserguire da terminale il comando `./monopoly <args>` dove args puo essere "human" oppure "computer"
 
 ### Attenzione
-Visto che il cmake è stato impostare con opzioni di compilazione -O2 (come richiesto dal testo), è necessario compilare il progetto senza flag di debug che possono fare conlitto con -O2 (eg -RTF)
+-Visto che il cmake è stato impostare con opzioni di compilazione -O2 (come richiesto dal testo), è necessario compilare il progetto senza flag di debug che possono fare conlitto con -O2 (eg -RTF)
+-Riguardo Visual Studio, per avviare il progetto è necessario impostare "monopoly" come progetto di avvio
 
 
 ## Scelte di Implementazione e Problemi di Sviluppo
