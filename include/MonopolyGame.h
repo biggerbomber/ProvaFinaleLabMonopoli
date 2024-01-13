@@ -50,7 +50,7 @@ private:
 
   //Gestisce le scelte dei player:
   //Parametri: stared_ptr<Player> è il player attivo al momento
-  //           shared_ptr<Tyle> è la casella di cui si chiede la gestione
+  //           shared_ptr<Tile> è la casella di cui si chiede la gestione
   // 
   // Internamente compie le azioni per gestire le richieste del player(EventType) che può gestire, 
   // e aggiorna l'evento quando le ha compiute
