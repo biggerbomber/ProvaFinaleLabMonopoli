@@ -26,7 +26,7 @@ public:
 
     std::shared_ptr<Tile> get_tile(Position& p) { return m_tiles[p.get_valore()]; };
 
-    std::ostream& print(std::ostream&, std::vector<std::shared_ptr<Player>>) const;
+    std::ostream& print(std::ostream&, std::vector<std::shared_ptr<Player>>&) const;
 private:
     std::array<std::shared_ptr<Tile>,BOARD_SIZE> m_tiles;
 };
