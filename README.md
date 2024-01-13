@@ -16,6 +16,13 @@ Benvenuti nel progetto finale dedicato alla riproduzione del gioco da tavolo Mon
 
 ## Scelte di Implementazione e Problemi di Sviluppo
 
+### Divisione dello sviluppo del codice
+Abbiamo deciso di dividere il codice in 3 libreria statiche concettualmente separate:
+1. MonoplyGameLib //Barbato Alberto
+2. BoardLib //Pinton Mattia
+3. PlayerLib //Casucci Leonardo
+Questo ha permesso, dopo esserci accordati sulle varie interfacce della classi, di lavorare indipendentemente l'uno dall altro, velocizzando drasticamente lo sviluppo del codice.
+
 ### Problemi con Dipendenze Circolari
 Durante lo sviluppo, ci siamo trovati di fronte a problemi legati a dipendenze circolari tra le classi del progetto.
 La nostra struttura delle classi è stata rivista per ridurre la dipendenza tra di esse e migliorare la modularità del codice.
