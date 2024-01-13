@@ -7,6 +7,7 @@ int main(int argc, char** argv) {
     std::cout << "Numero di paramentri da console errato , Attesi 1 Trovati : " << argc - 1 << std::endl;
     return -1;
   }
+  
   MonopolyGame::GameType gameType;
   if (strcmp(argv[1], "human") == 0)
   {

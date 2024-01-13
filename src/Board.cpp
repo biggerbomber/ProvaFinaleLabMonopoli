@@ -47,11 +47,11 @@ Board::Board()
 //##################### FUNZIONI #####################
 
 
-std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>> arr) const {
+std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>>& arr) const {
 
 	constexpr int N_ELEM_RIGHE = (BOARD_SIZE / 4) + 1; // numero elementi riga in alto e in basso
 	constexpr int N_ELEM_COLONNE = (BOARD_SIZE / 4) - 1; //tutti e 4 gli angoli sono compresi fra gli elementi delle righe
-	constexpr int TILE_WIDTH = 4 + MonopolyGame::N_PLAYER + 2; //=> ' ' + '|' + "TipoTerreno" + "TipoStruttura" + no.players + '|' + ' '
+	int TILE_WIDTH = 4 + arr.size() + 2; //=> ' ' + '|' + "TipoTerreno" + "TipoStruttura" + no.players + '|' + ' '
 	constexpr int INDENTAZIONE = 4; //quanti spazi fra le coordinate numeriche e la prima colonna del tabellone
 
 	//STAMPA COORDINATE NUMERICHE
@@ -195,28 +195,5 @@ bool Board::is_valid_position(Position p) const {
 
 //##################### OUTPUT OSTREAM #####################
 std::ostream& operator<<(std::ostream& os, const Board& b) {
-	os << "\n\n\n\n";
-	for (int i = 14; i < 22; i++) {
-		os << " |" << *b.get_tile(Position(i));
-		if (b.get_tile(Position(i))->has_proprietario())os << "P";
-		os << "| ";
-	}
-	os << "\n";
-	for (int i = 0, c1=13,c2 = 22; i < 6; i++) {
-		os << " |" << *b.get_tile(Position(c1));
-		if (b.get_tile(Position(c1))->has_proprietario())os << "P";
-		os << "|                               ";
-		os << " |" << *b.get_tile(Position(c2));
-		if (b.get_tile(Position(c2))->has_proprietario())os << "P";
-		os << "| \n";
-		c1--;
-		c2++;
-	}
-	for (int i = 7; i >= 0 ; i--) {
-		os << " |" << *b.get_tile(Position(i));
-		if (b.get_tile(Position(i))->has_proprietario())os << "P";
-		os << "| ";
-	}
-	os << "\n\n\n\n";
-	return os;
+	return b.print(os, std::vector<std::shared_ptr<Player>>{nullptr});
 }
