@@ -41,8 +41,11 @@ Abbiamo riscontrato che l'unica differenza tra un player umano e un bot è la mo
 
 ## Requsisti
 -1)  Un computer
+
 0)   Una connessione internet
+
 0,5) Compilatore C++ 
+
 1)   Cmake
 
 
