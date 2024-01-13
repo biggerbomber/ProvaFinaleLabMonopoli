@@ -303,7 +303,7 @@ EventType MonopolyGame::gestisci_eventi(std::shared_ptr<Player> p_attivo, std::s
     break;
 
   case ELIMINAZIONE:
-    gestisci_eliminazione(t_attiva, p_attivo,
+    gestisci_eliminazione(p_attivo,
       get_player_from_tag(t_attiva->get_proprietario()));
     m_log.log(EventType::PAGAMENTO_PERNOTTAMENTO,
       p_attivo->get_tag(),

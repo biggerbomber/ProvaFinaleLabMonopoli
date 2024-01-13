@@ -79,6 +79,6 @@ void libera_possedimenti(std::vector<std::shared_ptr<Tile>>&);
 void migliora_terreno(EventType, std::shared_ptr<Tile>, std::shared_ptr<Player>);
 void gestisci_acquisto_terreno(std::shared_ptr<Tile>, std::shared_ptr<Player>);
 void gestisci_pagamento_pernottamento(std::shared_ptr<Tile>, std::shared_ptr<Player>, std::shared_ptr<Player>);
-void gestisci_eliminazione(std::shared_ptr<Tile>, std::shared_ptr<Player>, std::shared_ptr<Player>);
+void gestisci_eliminazione(std::shared_ptr<Player>, std::shared_ptr<Player>);
 
 #endif

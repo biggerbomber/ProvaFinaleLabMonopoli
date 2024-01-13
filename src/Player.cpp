@@ -59,7 +59,7 @@ void gestisci_pagamento_pernottamento(std::shared_ptr<Tile> t, std::shared_ptr<P
   p_prop->riscuoti(t->get_costo_pernottamento());
 }
 
-void gestisci_eliminazione(std::shared_ptr<Tile> t, std::shared_ptr<Player> p_eliminato, std::shared_ptr<Player> p_prop) {
+void gestisci_eliminazione(std::shared_ptr<Player> p_eliminato, std::shared_ptr<Player> p_prop) {
   p_prop->riscuoti(p_eliminato->get_budget()); //il proprietario della tile riscuote tutto quello che puo' riscuotere
   p_eliminato->paga(p_eliminato->get_budget()); //setto il budget del giocatore a 0
   p_eliminato->set_eliminato(true);

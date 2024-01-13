@@ -1,4 +1,4 @@
-//@Casucci Leonardo 2073980
+//Barbato Alberto 2073961
 
 #ifndef EVENT_TYPE_H
 #define EVENT_TYPE_H
