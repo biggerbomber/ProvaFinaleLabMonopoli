@@ -47,7 +47,7 @@ Board::Board()
 //##################### FUNZIONI #####################
 
 
-std::ostream& Board::print(std::ostream& os, std::vector<std::shared_ptr<Player>>& arr) const {
+std::ostream& Board::print(std::ostream& os, const std::vector<std::shared_ptr<Player>>& arr) const {
 
 	constexpr int N_ELEM_RIGHE = (BOARD_SIZE / 4) + 1; // numero elementi riga in alto e in basso
 	constexpr int N_ELEM_COLONNE = (BOARD_SIZE / 4) - 1; //tutti e 4 gli angoli sono compresi fra gli elementi delle righe
