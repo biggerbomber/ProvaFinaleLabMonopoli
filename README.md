@@ -1,5 +1,6 @@
 # ProvaFinaleLabMonopoli
  Prova finale Barbato-Casucci-Pinonn
+Link Repository : [link][https://github.com/biggerbomber/ProvaFinaleLabMonopoli]
 
 ## Introduzione
 Benvenuti nel progetto finale dedicato alla riproduzione del gioco da tavolo Monopoly, sviluppato in linguaggio C++. Prodotta da Barbato Alberto, Casucci Leonardo e Pinton Mattia
@@ -15,6 +16,14 @@ Benvenuti nel progetto finale dedicato alla riproduzione del gioco da tavolo Mon
 
 
 ## Scelte di Implementazione e Problemi di Sviluppo
+
+### Divisione dello sviluppo del codice
+Abbiamo deciso di dividere il codice in 3 libreria statiche concettualmente separate:
+1. MonoplyGameLib //Barbato Alberto
+2. BoardLib //Pinton Mattia
+3. PlayerLib //Casucci Leonardo
+
+Questo ha permesso, dopo esserci accordati sulle varie interfacce della classi, di lavorare indipendentemente l'uno dall altro, velocizzando drasticamente lo sviluppo del codice.
 
 ### Problemi con Dipendenze Circolari
 Durante lo sviluppo, ci siamo trovati di fronte a problemi legati a dipendenze circolari tra le classi del progetto.
@@ -33,8 +42,11 @@ Abbiamo riscontrato che l'unica differenza tra un player umano e un bot è la mo
 
 ## Requsisti
 -1)  Un computer
+
 0)   Una connessione internet
+
 0,5) Compilatore C++ 
+
 1)   Cmake
 
 
