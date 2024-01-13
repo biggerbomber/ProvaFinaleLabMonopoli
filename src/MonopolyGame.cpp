@@ -151,7 +151,7 @@ void gestisci_turni(std::array<MonopolyGame::TurnoPlayer, MonopolyGame::N_PLAYER
 
   std::sort(arr.begin() + index_start, arr.begin() + index_end, compare);
   int range_equal_start = index_start;
-  //per ogni "range di tiro" uguali, ritira i dadi e chiama ricorivamnete questa funzione
+  //per ogni "range di tiro" uguali, ritira i dadi e chiama ricorsivamente questa funzione
   for (int i = index_start + 1; i <= index_end; i++)
   {
 
