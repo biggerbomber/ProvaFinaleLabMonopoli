@@ -63,6 +63,7 @@ private:
 
   Board m_board;
   std::array<std::shared_ptr<Player>, N_PLAYER> m_players;
+  //è un vettore che per ogni indice (numero di turno) salva il tag del giocatore che ha quel turno
   std::array<int, N_PLAYER> m_num_turno;
   Logger m_log;
   GameType m_game_type;

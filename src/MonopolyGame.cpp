@@ -11,12 +11,14 @@
 MonopolyGame::MonopolyGame(MonopolyGame::GameType pt) {
   srand((unsigned)time(0));
   m_game_type = pt;
+  
   switch (pt)
   {
   case MonopolyGame::GameType::BOT:
     m_players[0] = std::make_shared<Bot>(0, m_board.get_partenza());
     break;
   case MonopolyGame::GameType::HUMAN:
+    //il giocatore "umano" avrà sempre il tag 0
     m_players[0] = std::make_shared<Human>(0, m_board.get_partenza());
     break;
   default:
@@ -53,6 +55,7 @@ void MonopolyGame::run()
   int num_eliminati = 0;
   int turno = 0;
   int numturni = 0;
+  //finche non rimane solo un giocatore:
   while (num_eliminati != N_PLAYER - 1)
   {
     turno %= N_PLAYER;
@@ -96,7 +99,7 @@ void MonopolyGame::stampa_possedimenti() {
   for (int i = 0; i < N_PLAYER; i++)
   {
     std::cout << "Giocatore " << i << ":";
-    std::vector<std::shared_ptr<Tile>> poss = m_players[i]->get_possedimenti();
+    std::vector<std::shared_ptr<Tile>>& poss = m_players[i]->get_possedimenti();
     for (int i = 0; i < poss.size(); i++)
     {
       std::cout << " " << poss[i]->get_position();
@@ -202,6 +205,14 @@ void MonopolyGame::fine_partita_max_turni() {
   }
   std::cout << " con " << max_fiorini << " fiorini" << std::endl;
 
+  for (int i = 0; i < m_players.size(); i++) {
+    if (m_players[i]->get_budget() == max_fiorini) {
+      m_log.log(EventType::VITTORIA, m_players[i]->get_tag());
+    }
+    else {
+      break;
+    }
+  }
   std::cout << "Classifica Fiorini:" << std::endl;
 
   std::array<int, N_PLAYER> posizioni;
@@ -289,6 +300,9 @@ EventType MonopolyGame::gestisci_eventi(std::shared_ptr<Player> p_attivo, std::s
     break;
 
   case PAGAMENTO_PERNOTTAMENTO:
+    //il pagamento del pernottamento viene fatto anche se il costo è zero fiorini:
+    //Questo perche riteniamo sia comunque un pernottamento, perciò va loggato, e inoltre potremmo molto facilmente
+    //cambiare il costo del terreno vuoto, e tutto il resto del codice non avrebbe problemi a funzionare corretamnete
     gestisci_pagamento_pernottamento(t_attiva, p_attivo,
       get_player_from_tag(t_attiva->get_proprietario()));
     m_log.log(ris, p_attivo->get_tag(),

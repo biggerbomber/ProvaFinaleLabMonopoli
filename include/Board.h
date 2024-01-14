@@ -19,8 +19,9 @@ public:
     Position get_partenza()const {return Position(0);}
 
     const std::shared_ptr<Tile>& get_tile(Position p) const { return m_tiles[p.get_valore()]; };
-
-    bool avanza_e_controlla(Position&,int) const;//retsituisce true se si passa dal via
+    
+    //restituisce true se si passa dal via
+    bool avanza_e_controlla(Position&,int) const;
 
     bool is_valid_position(Position) const;
 
